@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NCT WISH 기획서</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#f7f6fc; --paper:#ffffff; --ink:#1f1d2b; --ink-soft:#6b6880; --line:#e8e5f3;
+  --mint:#9fe3d4; --sky:#a9d4f5; --lilac:#c9b8f2; --pink:#f6c4dc;
+  --accent:#7a64d6; --ink-mid:#3b3852; --cover-ink:#1f1d2b; --cover-sub:#3b3852; --glass:rgba(255,255,255,.7);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14121d; --paper:#1d1a29; --ink:#f1eefb; --ink-soft:#a6a1bd; --line:#2e2a40;
+  --accent:#b9a8ff; --ink-mid:#d6d1ea; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#14121d; --paper:#1d1a29; --ink:#f1eefb; --ink-soft:#a6a1bd; --line:#2e2a40;
+  --accent:#b9a8ff; --ink-mid:#d6d1ea; color-scheme:dark;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard','Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding-inline:20px;padding-block:64px 96px}
+
+/* 표지 */
+.cover{position:relative;overflow:hidden;border-radius:28px;padding:72px 48px;background:linear-gradient(135deg,var(--mint) 0%,var(--sky) 38%,var(--lilac) 70%,var(--pink) 100%);margin-bottom:40px}
+.cover::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.7),transparent 45%),radial-gradient(circle at 15% 85%,rgba(255,255,255,.5),transparent 40%);pointer-events:none}
+.cover > *{position:relative;z-index:1}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.12em;background:var(--glass);color:#7a64d6;padding:7px 16px;border-radius:999px;margin-bottom:20px}
+.cover h1{color:var(--cover-ink);font-size:clamp(34px,6vw,56px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:14px}
+.cover p{font-size:16px;color:var(--cover-sub);max-width:520px}
+
+/* 목차 */
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
+.toc a{font-size:13px;font-weight:600;color:var(--ink-soft);text-decoration:none;background:var(--paper);border:1px solid var(--line);padding:8px 16px;border-radius:999px;transition:.2s}
+.toc a:hover,.toc a:focus-visible{outline:none;color:var(--accent);border-color:var(--lilac)}
+
+/* 섹션 */
+section{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:40px 44px;margin-bottom:20px}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.num{font-size:13px;font-weight:800;color:var(--accent);letter-spacing:.08em}
+.sec-head h2{font-size:22px;font-weight:800;letter-spacing:-.01em}
+section p{font-size:15.5px;color:var(--ink-mid)}
+section p + p{margin-top:10px}
+
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{font-size:14.5px;font-weight:600;padding:10px 18px;border-radius:999px;background:var(--bg);border:1px solid var(--line)}
+
+.keywords{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.kw{font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;color:var(--cover-ink)}
+.kw.m{background:var(--mint)} .kw.s{background:var(--sky)} .kw.l{background:var(--lilac)} .kw.p{background:var(--pink)}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.box{background:var(--bg);border-radius:16px;padding:20px 22px}
+.box b{display:block;font-size:15.5px;font-weight:700;margin-bottom:4px}
+.box span{font-size:14px;color:var(--ink-soft)}
+
+.screens{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.screen{border-radius:18px;padding:24px 22px;border:1px solid var(--line);background:linear-gradient(180deg,var(--paper) 0%,var(--bg) 100%)}
+.screen .lbl{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.08em;margin-bottom:8px}
+.screen h3{font-size:18px;font-weight:800;margin-bottom:8px}
+.screen p{font-size:14px;color:var(--ink-soft)}
+
+.goals{list-style:none;display:grid;gap:10px}
+.goals li{display:flex;gap:14px;align-items:flex-start;font-size:15.5px;background:var(--bg);border-radius:14px;padding:16px 20px}
+.goals li::before{content:"✦";color:var(--accent);font-size:14px;line-height:1.8}
+
+footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
+
+@media (max-width:720px){
+  .wrap{padding-inline:16px;padding-block:24px 64px}
+  .cover{padding:48px 24px;border-radius:22px}
+  section{padding:28px 22px;border-radius:20px}
+  .grid,.screens{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="cover">
+    <span class="tag">PROJECT PLAN</span>
+    <h1>NCT WISH<br>아티스트 페이지 기획서</h1>
+    <p>꿈과 희망을 노래하는 NCT WISH의 아이덴티티를 담은 아티스트 소개 페이지</p>
+  </header>
+
+  <nav class="toc">
+    <a href="#bg">01 기획 배경</a>
+    <a href="#target">02 타깃</a>
+    <a href="#design">03 디자인 방향</a>
+    <a href="#feature">04 핵심 기능</a>
+    <a href="#screen">05 필요한 화면</a>
+    <a href="#goal">06 얻고 싶은 것</a>
+  </nav>
+
+  <section id="bg">
+    <div class="sec-head"><span class="num">01</span><h2>기획 배경</h2></div>
+    <p>SM 엔터테인먼트는 회사 사이트에서 아티스트 소개를 제공하지 않습니다.</p>
+    <p>아티스트별로 아이덴티티가 묻어나는 페이지가 있다면 마케팅에 도움이 될 것이라 판단해 디자인하게 되었습니다.</p>
+  </section>
+
+  <section id="target">
+    <div class="sec-head"><span class="num">02</span><h2>누가 보나요</h2></div>
+    <div class="chips">
+      <span class="chip">NCT WISH 팬</span>
+      <span class="chip">SM 관계자</span>
+      <span class="chip">엔터테인먼트 산업 관계자</span>
+    </div>
+  </section>
+
+  <section id="design">
+    <div class="sec-head"><span class="num">03</span><h2>디자인 방향</h2></div>
+    <p>NCT WISH는 꿈, 희망, 드림·엔젤코어 중심의 이미지를 가지고 있습니다.</p>
+    <p>밝고 몽환적인 컬러감과 이미지 타이포그래피를 사용하면 잘 어울릴 것입니다.</p>
+    <div class="keywords">
+      <span class="kw m">꿈</span>
+      <span class="kw s">희망</span>
+      <span class="kw l">드림코어</span>
+      <span class="kw p">엔젤코어</span>
+      <span class="kw m">밝고 몽환적인 컬러</span>
+      <span class="kw l">이미지 타이포그래피</span>
+    </div>
+  </section>
+
+  <section id="feature">
+    <div class="sec-head"><span class="num">04</span><h2>핵심 기능</h2></div>
+    <div class="grid">
+      <div class="box"><b>멤버 소개</b><span>멤버별 프로필과 매력 소개</span></div>
+      <div class="box"><b>활동 이력</b><span>데뷔부터 지금까지의 주요 활동</span></div>
+      <div class="box"><b>노래 · 앨범 · 뮤비 소개</b><span>발매작과 뮤직비디오 전시</span></div>
+      <div class="box"><b>수상 이력 소개</b><span>시상식 수상 기록 정리</span></div>
+    </div>
+  </section>
+
+  <section id="screen">
+    <div class="sec-head"><span class="num">05</span><h2>필요한 화면</h2></div>
+    <div class="screens">
+      <div class="screen"><div class="lbl">PAGE 01</div><h3>메인</h3><p>팀 소개와 멤버 소개</p></div>
+      <div class="screen"><div class="lbl">PAGE 02</div><h3>앨범 소개</h3><p>발매된 앨범과 노래 등을 소개하고 전시</p></div>
+      <div class="screen"><div class="lbl">PAGE 03</div><h3>수상 이력</h3><p>그동안 시상식에서 받은 상 소개</p></div>
+    </div>
+  </section>
+
+  <section id="goal">
+    <div class="sec-head"><span class="num">06</span><h2>얻고 싶은 것</h2></div>
+    <ul class="goals">
+      <li>바이브 코딩을 통한 난이도 있는 애니메이션 연출 연습</li>
+      <li>NCT WISH 분위기와 맞는 감각적인 디자인 연출</li>
+    </ul>
+  </section>
+
+  <footer>NCT WISH Artist Page · Project Plan</footer>
+</div>
+</body>
+</html>
