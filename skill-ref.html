@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+:root{
+  --cream:#f3ece2; --ink:#171512; --gold:#b5893f; --gold-soft:#c9a76b;
+  --dark:#141210; --line:rgba(23,21,18,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard',-apple-system,'Malgun Gothic',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;word-break:keep-all}
+.shell{max-width:1320px;margin:0 auto;padding:0 5%}
+
+/* ---------- section shells ---------- */
+.sec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+.sec-head .lbl{font-size:12px;font-weight:800;letter-spacing:.2em;color:var(--gold-soft)}
+
+/* ---------- skill (standalone) ---------- */
+.skill-sec{padding:40px 0 120px}
+.skill-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+.skill-copy .eyebrow{font-weight:800;font-size:13px;letter-spacing:.2em;color:var(--gold);margin-bottom:10px}
+.skill-copy h2{font-size:30px;font-weight:800;letter-spacing:-.01em;line-height:1.25;margin-bottom:20px}
+.skill-copy .rule{width:70px;height:2px;background:var(--ink);margin-bottom:20px}
+.skill-copy p{font-size:14px;color:#4a453e;max-width:360px}
+
+.skill-group + .skill-group{margin-top:48px}
+.skill-group h4{font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--gold);margin-bottom:10px}
+.skill-row{padding:16px 0;border-bottom:1px solid var(--line)}
+.skill-row:first-of-type{border-top:1px solid var(--line)}
+.skill-row .top{display:flex;align-items:center;gap:14px}
+.skill-row .bd{font-size:11px;font-weight:800;color:var(--dark);background:var(--gold-soft);padding:5px 12px;border-radius:2px;flex-shrink:0;letter-spacing:.04em}
+.skill-row .nm{flex:1;font-size:15px;font-weight:700}
+.skill-row .pc{font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--gold)}
+.skill-row .use{font-size:13px;color:#6b6154;margin-top:6px}
+.skill-bar{height:2px;background:var(--line);margin-top:12px}
+.skill-bar i{display:block;height:100%;background:var(--gold)}
+
+@media(max-width:960px){
+  .skill-layout{grid-template-columns:1fr;gap:36px}
+}
+</style>
+</head>
+<body>
+
+<section class="skill-sec">
+  <div class="shell">
+    <div class="sec-head"><div class="lbl">SKILL</div></div>
+    <div class="skill-layout">
+      <div class="skill-copy">
+        <div class="eyebrow">WHAT I USE</div>
+        <h2>기획부터 배포까지<br>직접 다루는 도구들</h2>
+        <div class="rule"></div>
+        <p>프로젝트마다 실제로 써 본 기술만 적었습니다. 막대는 스스로 느끼는 숙련도입니다.</p>
+      </div>
+
+      <div>
+        <div class="skill-group">
+          <h4>BUILD</h4>
+          <div class="skill-row">
+            <div class="top"><span class="bd">FRONTEND</span><span class="nm">HTML / CSS</span><span class="pc">85%</span></div>
+            <div class="use">무드보드 갤러리 · 팀 일정 공유 페이지</div>
+            <div class="skill-bar"><i style="width:85%"></i></div>
+          </div>
+          <div class="skill-row">
+            <div class="top"><span class="bd">FRONTEND</span><span class="nm">JavaScript</span><span class="pc">65%</span></div>
+            <div class="use">오늘의 할일 앱</div>
+            <div class="skill-bar"><i style="width:65%"></i></div>
+          </div>
+          <div class="skill-row">
+            <div class="top"><span class="bd">BACKEND</span><span class="nm">Supabase</span><span class="pc">55%</span></div>
+            <div class="use">오늘의 할일 앱 — 데이터 저장·불러오기</div>
+            <div class="skill-bar"><i style="width:55%"></i></div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h4>WORKFLOW</h4>
+          <div class="skill-row">
+            <div class="top"><span class="bd">VERSION CONTROL</span><span class="nm">Git · GitHub</span><span class="pc">70%</span></div>
+            <div class="use">팀 일정 공유 페이지 — 협업·배포</div>
+            <div class="skill-bar"><i style="width:70%"></i></div>
+          </div>
+          <div class="skill-row">
+            <div class="top"><span class="bd">WORKFLOW</span><span class="nm">Claude Code</span><span class="pc">75%</span></div>
+            <div class="use">바이브코딩 풀스택 과정 전반</div>
+            <div class="skill-bar"><i style="width:75%"></i></div>
+          </div>
+          <div class="skill-row">
+            <div class="top"><span class="bd">DESIGN</span><span class="nm">반응형 레이아웃</span><span class="pc">70%</span></div>
+            <div class="use">포트폴리오 사이트</div>
+            <div class="skill-bar"><i style="width:70%"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

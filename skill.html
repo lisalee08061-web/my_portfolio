@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    --cream:#f3ece2;
+    --ink:#171512;
+    --gold:#b5893f;
+    --gold-soft:#c9a76b;
+    --dark:#141210;
+    --line:rgba(23,21,18,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Pretendard',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    word-break:keep-all;
+  }
+
+  /* ===== Skill 섹션 (cream / 위 40px, 아래 120px) ===== */
+  .skill{background:var(--cream);padding:40px 0 120px}
+  .skill .inner{max-width:1320px;margin:0 auto;padding:0 60px}
+
+  .skill .eyebrow{
+    font-size:13px;font-weight:800;letter-spacing:.2em;
+    color:var(--gold);text-transform:uppercase;margin-bottom:18px;
+  }
+  .skill-head{
+    display:flex;justify-content:space-between;align-items:flex-end;gap:40px;
+    padding-bottom:40px;border-bottom:1.5px solid var(--line);
+  }
+  .skill-head h2{
+    font-size:clamp(40px,5vw,72px);font-weight:800;line-height:1.05;letter-spacing:-.02em;
+  }
+  .skill-head p{max-width:380px;font-size:16px;line-height:1.7;color:rgba(23,21,18,.7)}
+
+  .skill-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+  .skill-col{padding:44px 40px 0 0}
+  .skill-col + .skill-col{padding-left:40px;border-left:1px solid var(--line)}
+  .skill-col .num{
+    font-size:13px;font-weight:800;letter-spacing:.2em;color:var(--gold-soft);margin-bottom:14px;
+  }
+  .skill-col h3{font-size:24px;font-weight:800;margin-bottom:28px}
+
+  .skill-list{list-style:none}
+  .skill-list li{padding:14px 0;border-bottom:1px solid var(--line)}
+  .skill-list .row{display:flex;justify-content:space-between;font-size:16px;font-weight:600;margin-bottom:10px}
+  .skill-list .row span:last-child{font-size:13px;font-weight:800;letter-spacing:.2em;color:var(--gold)}
+  .bar{height:3px;background:var(--line)}
+  .bar i{display:block;height:100%;background:var(--gold)}
+
+  @media (max-width:900px){
+    .skill .inner{padding:0 24px}
+    .skill-head{flex-direction:column;align-items:flex-start}
+    .skill-grid{grid-template-columns:1fr}
+    .skill-col,.skill-col + .skill-col{padding:40px 0 0;border-left:0}
+  }
+</style>
+</head>
+<body>
+
+<section class="skill" id="skill">
+  <div class="inner">
+    <div class="skill-head">
+      <div>
+        <p class="eyebrow">Skill</p>
+        <h2>할 줄 아는 것들</h2>
+      </div>
+      <p>디자인부터 구현까지, 아이디어를 실제 결과물로 만드는 데 쓰는 도구와 역량입니다.</p>
+    </div>
+
+    <div class="skill-grid">
+      <div class="skill-col">
+        <p class="num">01 — DESIGN</p>
+        <h3>디자인</h3>
+        <ul class="skill-list">
+          <li><div class="row"><span>Figma</span><span>90%</span></div><div class="bar"><i style="width:90%"></i></div></li>
+          <li><div class="row"><span>Photoshop</span><span>80%</span></div><div class="bar"><i style="width:80%"></i></div></li>
+          <li><div class="row"><span>Illustrator</span><span>70%</span></div><div class="bar"><i style="width:70%"></i></div></li>
+        </ul>
+      </div>
+
+      <div class="skill-col">
+        <p class="num">02 — DEVELOP</p>
+        <h3>개발</h3>
+        <ul class="skill-list">
+          <li><div class="row"><span>HTML / CSS</span><span>85%</span></div><div class="bar"><i style="width:85%"></i></div></li>
+          <li><div class="row"><span>JavaScript</span><span>60%</span></div><div class="bar"><i style="width:60%"></i></div></li>
+          <li><div class="row"><span>Claude Code</span><span>75%</span></div><div class="bar"><i style="width:75%"></i></div></li>
+        </ul>
+      </div>
+
+      <div class="skill-col">
+        <p class="num">03 — SOFT</p>
+        <h3>협업</h3>
+        <ul class="skill-list">
+          <li><div class="row"><span>기획·문서화</span><span>85%</span></div><div class="bar"><i style="width:85%"></i></div></li>
+          <li><div class="row"><span>커뮤니케이션</span><span>90%</span></div><div class="bar"><i style="width:90%"></i></div></li>
+          <li><div class="row"><span>일정 관리</span><span>80%</span></div><div class="bar"><i style="width:80%"></i></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
