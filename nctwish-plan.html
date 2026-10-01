@@ -10,18 +10,10 @@
 :root{
   --bg:#f7f6fc; --paper:#ffffff; --ink:#1f1d2b; --ink-soft:#6b6880; --line:#e8e5f3;
   --mint:#9fe3d4; --sky:#a9d4f5; --lilac:#c9b8f2; --pink:#f6c4dc;
-  --accent:#7a64d6; --ink-mid:#3b3852; --cover-ink:#1f1d2b; --cover-sub:#3b3852; --glass:rgba(255,255,255,.7);
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#14121d; --paper:#1d1a29; --ink:#f1eefb; --ink-soft:#a6a1bd; --line:#2e2a40;
-  --accent:#b9a8ff; --ink-mid:#d6d1ea; color-scheme:dark;
-}}
-:root[data-theme="dark"]{
-  --bg:#14121d; --paper:#1d1a29; --ink:#f1eefb; --ink-soft:#a6a1bd; --line:#2e2a40;
-  --accent:#b9a8ff; --ink-mid:#d6d1ea; color-scheme:dark;
+  --accent:#7a64d6; color-scheme:light; --ink-mid:#3b3852; --cover-ink:#1f1d2b; --cover-sub:#3b3852; --glass:rgba(255,255,255,.7);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Pretendard','Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+body{font-family:'Pretendard','Noto Sans KR',-apple-system,sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
 .wrap{max-width:960px;margin:0 auto;padding-inline:20px;padding-block:64px 96px}
 
 /* 표지 */
