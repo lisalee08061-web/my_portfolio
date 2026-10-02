@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NCT WISH 기능정의서</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#f7f6fc; --paper:#ffffff; --ink:#1f1d2b; --ink-soft:#6b6880; --line:#e8e5f3;
+  --mint:#9fe3d4; --sky:#a9d4f5; --lilac:#c9b8f2; --pink:#f6c4dc;
+  --accent:#7a64d6; color-scheme:light; --ink-mid:#3b3852; --cover-ink:#1f1d2b; --cover-sub:#3b3852; --glass:rgba(255,255,255,.7);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard','Noto Sans KR',-apple-system,sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding-inline:20px;padding-block:64px 96px}
+
+/* 표지 */
+.cover{position:relative;overflow:hidden;border-radius:28px;padding:72px 48px;background:linear-gradient(135deg,var(--mint) 0%,var(--sky) 38%,var(--lilac) 70%,var(--pink) 100%);margin-bottom:40px}
+.cover::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.7),transparent 45%),radial-gradient(circle at 15% 85%,rgba(255,255,255,.5),transparent 40%);pointer-events:none}
+.cover > *{position:relative;z-index:1}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.12em;background:var(--glass);color:#7a64d6;padding:7px 16px;border-radius:999px;margin-bottom:20px}
+.cover h1{color:var(--cover-ink);font-size:clamp(34px,6vw,56px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:14px}
+.cover p{font-size:16px;color:var(--cover-sub);max-width:520px}
+.cover-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:28px}
+.cover-btn{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;text-decoration:none;color:#fff;background:var(--cover-ink);padding:11px 20px;border-radius:999px;transition:opacity .2s}
+.cover-btn.ghost{color:var(--cover-ink);background:var(--glass)}
+.cover-btn:hover,.cover-btn:focus-visible{opacity:.85;outline:none}
+.mail{font-size:14px;font-weight:600;color:var(--cover-sub);user-select:all}
+.more{display:flex;justify-content:flex-end;margin-top:16px}
+.more a{font-size:14px;font-weight:700;color:var(--accent);text-decoration:none}
+.more a:hover{text-decoration:underline}
+
+
+/* 목차 */
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
+.toc a{font-size:13px;font-weight:600;color:var(--ink-soft);text-decoration:none;background:var(--paper);border:1px solid var(--line);padding:8px 16px;border-radius:999px;transition:.2s}
+.toc a:hover,.toc a:focus-visible{outline:none;color:var(--accent);border-color:var(--lilac)}
+
+/* 섹션 */
+section{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:40px 44px;margin-bottom:20px}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.num{font-size:13px;font-weight:800;color:var(--accent);letter-spacing:.08em}
+.sec-head h2{font-size:22px;font-weight:800;letter-spacing:-.01em}
+
+/* 사용자 시나리오 */
+.scenarios{display:grid;gap:10px}
+.scenario{background:var(--bg);border-radius:16px;padding:20px 24px;font-size:15.5px;color:var(--ink-mid)}
+.scenario b{color:var(--accent);font-weight:800;margin-right:6px}
+
+/* 기능별 상세 */
+.feature{border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.feature + .feature{margin-top:24px}
+.feature-head{display:flex;align-items:baseline;gap:12px;padding:18px 24px;background:linear-gradient(135deg,var(--sky) 0%,var(--lilac) 100%)}
+.feature-head span{font-size:12px;font-weight:800;letter-spacing:.08em;color:#7a64d6}
+.feature-head h3{font-size:18px;font-weight:800;color:var(--cover-ink)}
+.purpose{padding:14px 24px;background:var(--bg);border-bottom:1px solid var(--line);font-size:14.5px;color:var(--ink-soft)}
+.purpose b{color:var(--ink-mid);font-weight:700;margin-right:6px}
+.spec{display:grid;grid-template-columns:150px minmax(0,1fr)}
+.spec dt,.spec dd{padding:16px 24px;border-bottom:1px solid var(--line)}
+.spec dt{background:var(--bg);font-size:13px;font-weight:800;color:var(--accent);letter-spacing:.02em}
+.spec dd{font-size:15px;color:var(--ink-mid)}
+.spec dt:nth-last-of-type(1),.spec dd:last-of-type{border-bottom:0}
+.spec ol{list-style:none;display:grid;gap:6px;counter-reset:n}
+.spec ol li{display:flex;gap:10px;counter-increment:n}
+.spec ol li::before{content:counter(n);flex-shrink:0;width:20px;height:20px;margin-top:3px;border-radius:50%;background:var(--lilac);color:var(--cover-ink);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+
+footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
+
+@media (max-width:720px){
+  .wrap{padding-inline:16px;padding-block:24px 64px}
+  .cover{padding:48px 24px;border-radius:22px}
+  section{padding:28px 22px;border-radius:20px}
+  .feature-head,.purpose{padding-inline:18px}
+  .spec{grid-template-columns:1fr}
+  .spec dt{padding:12px 18px 4px;border-bottom:0}
+  .spec dd{padding:4px 18px 14px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="cover">
+    <span class="tag">FEATURE DEFINITION</span>
+    <h1>NCT WISH<br>기능정의서</h1>
+    <p>기획서의 핵심 기능을 구체적으로 풀어쓴 문서</p>
+    <div class="cover-meta">
+      <a class="cover-btn" href="https://www.figma.com/board/yKJ5nljZsvhvsjKZjzg8Je/Vibe-Coding?node-id=15-122&amp;t=KS2YDOVwWxxxQo7v-1" target="_blank" rel="noopener">FigJam 보드 보기 ↗</a>
+      <a class="cover-btn ghost" href="nctwish-plan.html">← 기획서로 돌아가기</a>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <a href="#scenario">01 사용자 시나리오</a>
+    <a href="#features">02 기능별 상세</a>
+  </nav>
+
+  <section id="scenario">
+    <div class="sec-head"><span class="num">01</span><h2>사용자 시나리오</h2></div>
+    <div class="scenarios">
+      <div class="scenario"><b>시나리오 1 —</b>처음 들어온 팬이 캡차 화면에서 위시코어 사진 하나를 눌러 메인 페이지로 들어가고, 자동 재생되는 최신 MV를 본다.</div>
+      <div class="scenario"><b>시나리오 2 —</b>스크롤을 내리며 그룹 소개를 읽고, 좋아하는 멤버 이름에 마우스를 올려 멤버 정보를 확인한다.</div>
+      <div class="scenario"><b>시나리오 3 —</b>앨범 썸네일을 눌러 앨범 정보와 트랙리스트를 보고, 수상 기록을 훑어본 뒤 공식 채널로 이동한다.</div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="sec-head"><span class="num">02</span><h2>기능별 상세</h2></div>
+
+    <div class="feature">
+      <div class="feature-head"><span>FEATURE 01</span><h3>캡차 사진 선택</h3></div>
+      <div class="purpose"><b>목적 —</b>WISH(소원)라는 그룹명을 첫 화면에서 직접 체험하게 하기 위해</div>
+      <dl class="spec">
+        <dt>어느 화면</dt><dd>HERO · “What’s your wish?” 캡차 화면</dd>
+        <dt>무엇을 하면</dt><dd>위시코어 사진 중 하나를 누르면</dd>
+        <dt>무슨 일이</dt><dd><ol>
+          <li>누른 사진이 선택 표시된다</li>
+          <li>캡차 화면이 사라지고 메인 페이지로 넘어간다</li>
+        </ol></dd>
+      </dl>
+    </div>
+
+    <div class="feature">
+      <div class="feature-head"><span>FEATURE 02</span><h3>MV 스크롤 전환</h3></div>
+      <div class="purpose"><b>목적 —</b>최신 MV를 보여준 뒤 자연스럽게 다음 내용으로 넘어가게 하기 위해</div>
+      <dl class="spec">
+        <dt>어느 화면</dt><dd>RECENT RELEASE · 첫 화면 MV</dd>
+        <dt>무엇을 하면</dt><dd>메인 페이지에 들어오면 / 아래로 스크롤하면</dd>
+        <dt>무슨 일이</dt><dd><ol>
+          <li>최근 발매 MV가 화면 전체에 음소거 상태로 자동 재생된다</li>
+          <li>스크롤할수록 영상이 흐려지며 사라지고 다음 섹션이 나타난다</li>
+        </ol></dd>
+      </dl>
+    </div>
+
+    <div class="feature">
+      <div class="feature-head"><span>FEATURE 03</span><h3>사진 키워드 호버</h3></div>
+      <div class="purpose"><b>목적 —</b>사진과 단어로 그룹의 이미지를 함께 전하기 위해</div>
+      <dl class="spec">
+        <dt>어느 화면</dt><dd>ABOUT · 사진 콜라주</dd>
+        <dt>무엇을 하면</dt><dd>사진에 마우스를 올리면</dd>
+        <dt>무슨 일이</dt><dd><ol>
+          <li>사진이 살짝 확대된다</li>
+          <li>사진 위에 “꿈”, “희망”, “드림코어” 같은 키워드가 뜬다</li>
+        </ol></dd>
+      </dl>
+    </div>
+
+    <div class="feature">
+      <div class="feature-head"><span>FEATURE 04</span><h3>멤버 정보 카드</h3></div>
+      <div class="purpose"><b>목적 —</b>멤버별 기본 정보를 바로 확인할 수 있게 하기 위해</div>
+      <dl class="spec">
+        <dt>어느 화면</dt><dd>MEMBERS · 멤버 이름</dd>
+        <dt>무엇을 하면</dt><dd>멤버 이름에 마우스를 올리면</dd>
+        <dt>무슨 일이</dt><dd><ol>
+          <li>이름 색이 바뀐다</li>
+          <li>사진, 이름, 국적, 생년월일이 담긴 카드가 뜬다</li>
+          <li>다른 이름으로 옮기면 카드 내용이 그 멤버로 바뀐다</li>
+        </ol></dd>
+      </dl>
+    </div>
+
+    <div class="feature">
+      <div class="feature-head"><span>FEATURE 05</span><h3>앨범 썸네일 선택</h3></div>
+      <div class="purpose"><b>목적 —</b>원하는 앨범의 정보를 골라 볼 수 있게 하기 위해</div>
+      <dl class="spec">
+        <dt>어느 화면</dt><dd>DISCOGRAPHY · 오른쪽 앨범 썸네일</dd>
+        <dt>무엇을 하면</dt><dd>썸네일을 누르면</dd>
+        <dt>무슨 일이</dt><dd><ol>
+          <li>선택한 썸네일에 테두리가 생긴다</li>
+          <li>왼쪽에 그 앨범의 커버, 이름, 소개, 트랙리스트가 뜬다</li>
+        </ol></dd>
+      </dl>
+    </div>
+
+    <div class="feature">
+      <div class="feature-head"><span>FEATURE 06</span><h3>앨범 목록 화살표</h3></div>
+      <div class="purpose"><b>목적 —</b>앨범 목록을 원하는 속도로 넘겨 볼 수 있게 하기 위해</div>
+      <dl class="spec">
+        <dt>어느 화면</dt><dd>DISCOGRAPHY · 썸네일 목록 위아래 화살표</dd>
+        <dt>무엇을 하면</dt><dd>↓ 또는 ↑ 화살표를 누르면</dd>
+        <dt>무슨 일이</dt><dd><ol>
+          <li>썸네일 목록이 한 칸씩 아래 또는 위로 이동한다</li>
+          <li>목록 끝에 닿으면 해당 화살표가 흐려진다</li>
+        </ol></dd>
+      </dl>
+    </div>
+
+    <div class="feature">
+      <div class="feature-head"><span>FEATURE 07</span><h3>수상 카드 스크롤</h3></div>
+      <div class="purpose"><b>목적 —</b>수상 기록을 한 화면에서 이어서 훑어보게 하기 위해</div>
+      <dl class="spec">
+        <dt>어느 화면</dt><dd>AWARDS &amp; ACHIEVEMENTS · 수상 카드</dd>
+        <dt>무엇을 하면</dt><dd>섹션에 도착하면 / 카드에 마우스를 올리면</dd>
+        <dt>무슨 일이</dt><dd><ol>
+          <li>수상 카드가 가로로 자동 스크롤된다</li>
+          <li>마우스를 올리면 스크롤이 멈춘다</li>
+        </ol></dd>
+      </dl>
+    </div>
+
+    <div class="feature">
+      <div class="feature-head"><span>FEATURE 08</span><h3>공식 채널 아이콘</h3></div>
+      <div class="purpose"><b>목적 —</b>페이지에서 공식 채널로 바로 이어지게 하기 위해</div>
+      <dl class="spec">
+        <dt>어느 화면</dt><dd>OFFICIAL · Footer 아이콘</dd>
+        <dt>무엇을 하면</dt><dd>Instagram, X, YouTube, Spotify 아이콘을 누르면</dd>
+        <dt>무슨 일이</dt><dd><ol>
+          <li>해당 공식 채널이 새 탭으로 열린다</li>
+        </ol></dd>
+      </dl>
+    </div>
+  </section>
+
+  <footer>NCT WISH Artist Page · Feature Definition</footer>
+</div>
+</body>
+</html>

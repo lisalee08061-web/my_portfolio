@@ -23,6 +23,15 @@ body{font-family:'Pretendard','Noto Sans KR',-apple-system,sans-serif;background
 .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.12em;background:var(--glass);color:#7a64d6;padding:7px 16px;border-radius:999px;margin-bottom:20px}
 .cover h1{color:var(--cover-ink);font-size:clamp(34px,6vw,56px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:14px}
 .cover p{font-size:16px;color:var(--cover-sub);max-width:520px}
+.cover-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:28px}
+.cover-btn{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;text-decoration:none;color:#fff;background:var(--cover-ink);padding:11px 20px;border-radius:999px;transition:opacity .2s}
+.cover-btn.ghost{color:var(--cover-ink);background:var(--glass)}
+.cover-btn:hover,.cover-btn:focus-visible{opacity:.85;outline:none}
+.mail{font-size:14px;font-weight:600;color:var(--cover-sub);user-select:all}
+.more{display:flex;justify-content:flex-end;margin-top:16px}
+.more a{font-size:14px;font-weight:700;color:var(--accent);text-decoration:none}
+.more a:hover{text-decoration:underline}
+
 
 /* 목차 */
 .toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
@@ -61,6 +70,20 @@ section p + p{margin-top:10px}
 .goals li{display:flex;gap:14px;align-items:flex-start;font-size:15.5px;background:var(--bg);border-radius:14px;padding:16px 20px}
 .goals li::before{content:"✦";color:var(--accent);font-size:14px;line-height:1.8}
 
+.ref-group + .ref-group{margin-top:28px}
+.ref-group h3{font-size:15px;font-weight:800;margin-bottom:10px;display:flex;align-items:baseline;gap:10px}
+.ref-group h3 small{font-size:13px;font-weight:500;color:var(--ink-soft)}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px}
+.ref{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+.ref th{text-align:left;font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--ink-soft);background:var(--bg);padding:12px 18px;border-bottom:1px solid var(--line);white-space:nowrap}
+.ref td{padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-mid)}
+.ref tr:last-child td{border-bottom:0}
+.ref td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.ref a{color:var(--accent);font-weight:700;text-decoration:none;white-space:nowrap}
+.ref a:hover{text-decoration:underline}
+.ref .no{color:var(--ink-soft)}
+.ref .why{display:block;font-size:13px;color:var(--ink-soft);margin-top:2px}
+
 footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
 
 @media (max-width:720px){
@@ -79,6 +102,10 @@ footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
     <span class="tag">PROJECT PLAN</span>
     <h1>NCT WISH<br>아티스트 페이지 기획서</h1>
     <p>꿈과 희망을 노래하는 NCT WISH의 아이덴티티를 담은 아티스트 소개 페이지</p>
+    <div class="cover-meta">
+      <a class="cover-btn" href="nctwish-features.html">기능정의서 보기 →</a>
+      <a class="cover-btn ghost" href="mailto:lisalee0806@naver.com">lisalee0806@naver.com</a>
+    </div>
   </header>
 
   <nav class="toc">
@@ -88,6 +115,7 @@ footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
     <a href="#feature">04 핵심 기능</a>
     <a href="#screen">05 페이지 구성</a>
     <a href="#goal">06 얻고 싶은 것</a>
+    <a href="#ref">07 참고 사이트</a>
   </nav>
 
   <section id="bg">
@@ -127,6 +155,7 @@ footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
       <div class="box"><b>디스코그래피</b><span>발매 순서별 앨범과 트랙리스트, 앨범 소개</span></div>
       <div class="box"><b>수상 이력 · 주요 기록</b><span>시상식 수상 기록과 주요 성과 정리</span></div>
     </div>
+    <div class="more"><a href="nctwish-features.html">기능별 상세는 기능정의서에서 보기 →</a></div>
   </section>
 
   <section id="screen">
@@ -154,7 +183,52 @@ footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
     </ul>
   </section>
 
-  <footer>NCT WISH Artist Page · Project Plan</footer>
+  <section id="ref">
+    <div class="sec-head"><span class="num">07</span><h2>참고 사이트</h2></div>
+
+    <div class="ref-group">
+      <h3>웹사이트 <small>구성과 애니메이션 참고</small></h3>
+      <div class="table-wrap"><table class="ref">
+        <thead><tr><th>사이트</th><th>참고 포인트</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://velourproductions.com/" target="_blank" rel="noopener">Velour Productions ↗</a></td><td>영상으로 시작해 랜딩페이지로 넘어가는 흐름, 다양한 이미지가 흩뿌려진(scattered) 비주얼<br>Selected Work를 보여주는 구도 — 그 앞에 멤버 소개를 넣을 것</td></tr>
+          <tr><td><a href="https://www.wearetheromans.com/" target="_blank" rel="noopener">We Are The Romans ↗</a></td><td>아래로 스크롤할 때 사진들이 따라 올라가는 애니메이션</td></tr>
+          <tr><td><a href="https://nickho-motorsports.nl/" target="_blank" rel="noopener">Nick Ho Motorsports ↗</a></td><td>드래그하면 사진이 바뀌는 카루셀</td></tr>
+          <tr><td><a href="https://loveandmoney.com/" target="_blank" rel="noopener">Love and Money ↗</a></td><td>왼쪽에 큰 이미지, 오른쪽에 썸네일 배치<br>스크롤하면 양쪽 이미지가 따라 내려가는 애니메이션</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ref-group">
+      <h3>무드보드 <small>Pinterest · 레이아웃과 컬러 참고</small></h3>
+      <div class="table-wrap"><table class="ref">
+        <thead><tr><th>번호</th><th>참고 포인트</th><th>링크</th></tr></thead>
+        <tbody>
+          <tr><td>01</td><td>타이포그래피와 데코 스티커로 꽉 채운 화려한 레이아웃</td><td><a href="https://www.pinterest.com/pin/8514686792399979/" target="_blank" rel="noopener">보기 ↗</a></td></tr>
+          <tr><td>02</td><td>하늘색 + 노랑 카드 컬러 조합</td><td><a href="https://www.pinterest.com/pin/21040323255594445/" target="_blank" rel="noopener">보기 ↗</a></td></tr>
+          <tr><td>03</td><td>알록달록한 컬러 카드와 이미지를 앞뒤로 겹쳐 배치</td><td><a href="https://www.pinterest.com/pin/1009932285278795145/" target="_blank" rel="noopener">보기 ↗</a></td></tr>
+          <tr><td>04</td><td>큰 이미지 옆에 ‘our collection’을 컬럼으로 배치<br>→ 앨범 소개에 앨범 커버 + 트랙리스트로 적용</td><td><a href="https://www.pinterest.com/pin/633387444860352/" target="_blank" rel="noopener">보기 ↗</a></td></tr>
+          <tr><td>05</td><td>중간중간 비어 있는 그리드 디자인</td><td><a href="https://www.pinterest.com/pin/1126533294316600985/" target="_blank" rel="noopener">보기 ↗</a></td></tr>
+          <tr><td>06</td><td>여기저기 흩뿌려져 있는 작은 사진</td><td><a href="https://www.pinterest.com/pin/577868195973018615/" target="_blank" rel="noopener">보기 ↗</a></td></tr>
+          <tr><td>07</td><td>자유로운 이미지 배치</td><td><a href="https://www.pinterest.com/pin/728949889726030318/" target="_blank" rel="noopener">보기 ↗</a></td></tr>
+          <tr><td>08</td><td>정돈되어 있으면서도 다이내믹한 이미지 크기 대비와 배치</td><td><a href="https://www.pinterest.com/pin/1136384918501572611/" target="_blank" rel="noopener">보기 ↗</a></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ref-group">
+      <h3>아이돌 공식 사이트 <small>넣을 것과 뺄 것</small></h3>
+      <div class="table-wrap"><table class="ref">
+        <thead><tr><th>사이트</th><th>있으면 좋은 것</th><th>없어도 되는 것</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://itzy.jype.com/profile" target="_blank" rel="noopener">ITZY 프로필 ↗</a></td><td>멤버별 간단 소개</td><td class="no">Video 모음집<span class="why">유튜브에 이미 아카이빙되어 있음</span></td></tr>
+          <tr><td><a href="https://ibighit.com/ko/txt/profile/" target="_blank" rel="noopener">TXT 프로필 ↗</a></td><td>그룹 소개 — 어떤 음악을 추구하는지, 그룹명의 의미</td><td class="no">투어 일정 및 예매<span class="why">SNS와 티켓 플랫폼에 이미 자세히 나와 있음</span></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <footer>NCT WISH Artist Page · Project Plan · lisalee0806@naver.com</footer>
 </div>
 </body>
 </html>
