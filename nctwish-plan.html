@@ -49,12 +49,14 @@ section p + p{margin-top:10px}
 .box b{display:block;font-size:15.5px;font-weight:700;margin-bottom:4px}
 .box span{font-size:14px;color:var(--ink-soft)}
 
-.screens{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.screen{border-radius:18px;padding:24px 22px;border:1px solid var(--line);background:linear-gradient(180deg,var(--paper) 0%,var(--bg) 100%)}
-.screen .lbl{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.08em;margin-bottom:8px}
-.screen h3{font-size:18px;font-weight:800;margin-bottom:8px}
-.screen p{font-size:14px;color:var(--ink-soft)}
-
+.flow{list-style:none;display:grid;gap:10px}
+.flow li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;align-items:start;border:1px solid var(--line);border-radius:18px;padding:20px 22px;background:linear-gradient(180deg,var(--paper) 0%,var(--bg) 100%)}
+.flow .no{font-size:13px;font-weight:800;color:var(--accent);letter-spacing:.06em;line-height:1.9}
+.flow h3{font-size:16px;font-weight:800;letter-spacing:.04em;margin-bottom:4px}
+.flow p{font-size:14.5px;color:var(--ink-soft)}
+.flow ul{list-style:none;display:grid;gap:4px;margin-top:6px}
+.flow ul li{display:block;border:0;padding:0;background:none;border-radius:0;font-size:14px;color:var(--ink-soft)}
+.flow ul li b{color:var(--ink);font-weight:700;margin-right:6px}
 .goals{list-style:none;display:grid;gap:10px}
 .goals li{display:flex;gap:14px;align-items:flex-start;font-size:15.5px;background:var(--bg);border-radius:14px;padding:16px 20px}
 .goals li::before{content:"✦";color:var(--accent);font-size:14px;line-height:1.8}
@@ -65,7 +67,8 @@ footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
   .wrap{padding-inline:16px;padding-block:24px 64px}
   .cover{padding:48px 24px;border-radius:22px}
   section{padding:28px 22px;border-radius:20px}
-  .grid,.screens{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  .flow li{grid-template-columns:1fr;gap:4px}
 }
 </style>
 </head>
@@ -83,7 +86,7 @@ footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
     <a href="#target">02 타깃</a>
     <a href="#design">03 디자인 방향</a>
     <a href="#feature">04 핵심 기능</a>
-    <a href="#screen">05 필요한 화면</a>
+    <a href="#screen">05 페이지 구성</a>
     <a href="#goal">06 얻고 싶은 것</a>
   </nav>
 
@@ -119,20 +122,28 @@ footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
   <section id="feature">
     <div class="sec-head"><span class="num">04</span><h2>핵심 기능</h2></div>
     <div class="grid">
-      <div class="box"><b>멤버 소개</b><span>멤버별 프로필과 매력 소개</span></div>
-      <div class="box"><b>활동 이력</b><span>데뷔부터 지금까지의 주요 활동</span></div>
-      <div class="box"><b>노래 · 앨범 · 뮤비 소개</b><span>발매작과 뮤직비디오 전시</span></div>
-      <div class="box"><b>수상 이력 소개</b><span>시상식 수상 기록 정리</span></div>
+      <div class="box"><b>멤버 소개</b><span>그룹 소개와 멤버별 이름·국적·생년월일</span></div>
+      <div class="box"><b>최신 활동 · MV</b><span>최근 발매한 뮤직비디오 소개</span></div>
+      <div class="box"><b>디스코그래피</b><span>발매 순서별 앨범과 트랙리스트, 앨범 소개</span></div>
+      <div class="box"><b>수상 이력 · 주요 기록</b><span>시상식 수상 기록과 주요 성과 정리</span></div>
     </div>
   </section>
 
   <section id="screen">
-    <div class="sec-head"><span class="num">05</span><h2>필요한 화면</h2></div>
-    <div class="screens">
-      <div class="screen"><div class="lbl">PAGE 01</div><h3>메인</h3><p>팀 소개와 멤버 소개</p></div>
-      <div class="screen"><div class="lbl">PAGE 02</div><h3>앨범 소개</h3><p>발매된 앨범과 노래 등을 소개하고 전시</p></div>
-      <div class="screen"><div class="lbl">PAGE 03</div><h3>수상 이력</h3><p>그동안 시상식에서 받은 상 소개</p></div>
-    </div>
+    <div class="sec-head"><span class="num">05</span><h2>페이지 구성</h2></div>
+    <p style="margin-bottom:18px">한 페이지를 위에서 아래로 스크롤하며 보는 구성입니다. 순서는 아래와 같습니다.</p>
+    <ol class="flow">
+      <li><span class="no">01</span><div><h3>HERO</h3><p>“What’s your wish?” 캡차 화면으로 시작합니다.</p></div></li>
+      <li><span class="no">02</span><div><h3>RECENT RELEASE</h3><p>최근 발매한 MV를 소개합니다.</p></div></li>
+      <li><span class="no">03</span><div><h3>ABOUT</h3>
+        <ul>
+          <li><b>그룹 소개</b>NCT WISH의 뜻, 데뷔일, 음악이 추구하는 방향</li>
+          <li><b>멤버 소개</b>이름, 국적, 생년월일</li>
+        </ul></div></li>
+      <li><span class="no">04</span><div><h3>DISCOGRAPHY</h3><p>발매 순서별 앨범, 트랙리스트, 앨범 소개</p></div></li>
+      <li><span class="no">05</span><div><h3>AWARDS &amp; ACHIEVEMENTS</h3><p>수상 이력과 주요 기록</p></div></li>
+      <li><span class="no">06</span><div><h3>OFFICIAL</h3><p>공식 SNS, YouTube, Spotify 등 공식 채널 연결과 Footer</p></div></li>
+    </ol>
   </section>
 
   <section id="goal">
