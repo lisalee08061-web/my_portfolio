@@ -8,19 +8,19 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap">
 <style>
 :root{
-  --bg:#f7f6fc; --paper:#ffffff; --ink:#1f1d2b; --ink-soft:#6b6880; --line:#e8e5f3;
-  --mint:#9fe3d4; --sky:#a9d4f5; --lilac:#c9b8f2; --pink:#f6c4dc;
-  --accent:#7a64d6; color-scheme:light; --ink-mid:#3b3852; --cover-ink:#1f1d2b; --cover-sub:#3b3852; --glass:rgba(255,255,255,.7);
+  --bg:#E6EEF5; --beige:#F5EFEB; --paper:#FFFFFF; --ink:#2F4156; --ink-soft:#567C8D; --line:#C8D9E6;
+  --mint:#F5EFEB; --sky:#C8D9E6; --lilac:#C8D9E6; --pink:#F5EFEB;
+  --accent:#2F4156; color-scheme:light; --ink-mid:#2F4156; --cover-ink:#2F4156; --cover-sub:#567C8D; --glass:rgba(255,255,255,.7);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Pretendard','Noto Sans KR',-apple-system,sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
 .wrap{max-width:960px;margin:0 auto;padding-inline:20px;padding-block:64px 96px}
 
 /* 표지 */
-.cover{position:relative;overflow:hidden;border-radius:28px;padding:72px 48px;background:linear-gradient(135deg,var(--mint) 0%,var(--sky) 38%,var(--lilac) 70%,var(--pink) 100%);margin-bottom:40px}
+.cover{position:relative;overflow:hidden;border-radius:28px;padding:72px 48px;background:linear-gradient(135deg,var(--sky) 0%,var(--bg) 65%,var(--beige) 100%);margin-bottom:40px}
 .cover::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.7),transparent 45%),radial-gradient(circle at 15% 85%,rgba(255,255,255,.5),transparent 40%);pointer-events:none}
 .cover > *{position:relative;z-index:1}
-.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.12em;background:var(--glass);color:#7a64d6;padding:7px 16px;border-radius:999px;margin-bottom:20px}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.12em;background:var(--accent);color:var(--paper);padding:7px 16px;border-radius:999px;margin-bottom:20px}
 .cover h1{color:var(--cover-ink);font-size:clamp(34px,6vw,56px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:14px}
 .cover p{font-size:16px;color:var(--cover-sub);max-width:520px}
 .cover-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:28px}
@@ -67,7 +67,7 @@ section p + p{margin-top:10px}
 .flow ul li{display:block;border:0;padding:0;background:none;border-radius:0;font-size:14px;color:var(--ink-soft)}
 .flow ul li b{color:var(--ink);font-weight:700;margin-right:6px}
 .goals{list-style:none;display:grid;gap:10px}
-.goals li{display:flex;gap:14px;align-items:flex-start;font-size:15.5px;background:var(--bg);border-radius:14px;padding:16px 20px}
+.goals li{display:flex;gap:14px;align-items:flex-start;font-size:15.5px;background:var(--beige);border-radius:14px;padding:16px 20px}
 .goals li::before{content:"✦";color:var(--accent);font-size:14px;line-height:1.8}
 
 .ref-group + .ref-group{margin-top:28px}
