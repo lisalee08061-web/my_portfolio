@@ -3,286 +3,398 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>이채원 — Portfolio</title>
+<title>NCT WISH</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
 :root{
-  --bg:#000000; --main:#88cfe3;
-  --ink:#ffffff; --ink-soft:#a3a3a3; --line:#2a2a2a; --card:#141414; --pill-bg:#1f1f1f;
-  --content: 1360px; --gut:20px;
-  --sp1:5px; --sp2:10px; --sp3:20px; --sp4:30px; --sp5:40px; --sp6:60px; --sp7:80px; --sp8:100px;
+  --bg:#ffffff; --ink:#111111; --ink-soft:#666666; --line:#e5e5e5; --soft:#f5f5f5;
+  --mint:#e9e9e9; --sky:#d4d4d4; --lilac:#c2c2c2; --pink:#dedede; --accent:#111111;
+  --dream:linear-gradient(135deg,var(--mint) 0%,var(--sky) 35%,var(--lilac) 70%,var(--pink) 100%);
+  --content:1400px;
+  --sp1:5px; --sp2:10px; --sp3:20px; --sp4:30px; --sp5:40px; --sp6:60px; --sp7:80px; --sp8:100px; --sp9:120px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Pretendard',-apple-system,'Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+body{font-family:'Pretendard',-apple-system,'Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
 .shell{max-width:var(--content);margin:0 auto;padding:0 5%}
+.sec{padding:var(--sp8) 0;border-top:1px solid var(--line)}
+.sec-eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--accent);margin-bottom:var(--sp2)}
+.sec-title{font-size:32px;font-weight:800;letter-spacing:-.01em}
 
-.pill{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.06em;background:var(--pill-bg);color:var(--main);padding:8px 18px;border-radius:999px;margin-bottom:var(--sp3)}
-.card{background:var(--card);border-radius:22px;box-shadow:0 2px 10px rgba(22,21,19,.05);padding:var(--sp5)}
+/* 사진·영상 자리표시 */
+.ph{position:relative;background:var(--dream);border-radius:16px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.ph::after{content:attr(data-label);font-size:11px;font-weight:700;letter-spacing:.1em;color:rgba(17,17,17,.45)}
 
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
-.reveal.in{opacity:1;transform:translateY(0)}
+/* reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
 
-/* ---------- header ---------- */
-header.site{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.85);backdrop-filter:blur(8px)}
-header.site .shell{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:78px}
-.logo{font-size:18px;font-weight:800;color:var(--main)}
-nav.main{display:flex;gap:var(--sp5)}
-nav.main a{font-size:14px;color:var(--ink-soft);font-weight:500}
-nav.main a:hover{color:var(--ink)}
-.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--main);color:var(--bg);font-size:13px;font-weight:700;padding:12px 20px;border-radius:999px;justify-self:end}
+/* ---------- HERO : MV 자동재생, 스크롤하면 사라짐 ---------- */
+.hero{height:100vh;min-height:560px;position:relative}
+.hero-stage{position:sticky;top:0;height:100vh;min-height:560px;overflow:hidden;will-change:opacity,transform}
+.hero-video{position:absolute;inset:0;border-radius:0;background:linear-gradient(120deg,var(--mint),var(--sky),var(--lilac),var(--pink),var(--mint));background-size:400% 400%;animation:drift 18s ease-in-out infinite}
+.hero-video::after{position:absolute;bottom:var(--sp4);right:5%}
+.hero-video video{width:100%;height:100%;object-fit:cover}
+@keyframes drift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero-copy{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:var(--sp2);padding:0 5%}
+.hero-copy h1{font-size:clamp(56px,11vw,160px);font-weight:800;letter-spacing:-.03em;line-height:1}
+.hero-copy p{font-size:clamp(14px,1.6vw,18px);font-weight:700;letter-spacing:.3em}
+.scroll-hint{position:absolute;left:50%;bottom:var(--sp4);transform:translateX(-50%);z-index:1;font-size:11px;font-weight:700;letter-spacing:.2em;color:rgba(17,17,17,.6)}
 
-/* ---------- hero ---------- */
-.hero{padding:var(--sp6) 0 var(--sp7);text-align:center}
-.hero h1{font-size:clamp(30px,4.4vw,48px);font-weight:800;letter-spacing:-.02em;line-height:1.3;max-width:760px;margin:0 auto var(--sp4)}
-.hero p{font-size:15px;color:var(--ink-soft);max-width:480px;margin:0 auto var(--sp5)}
-.hero .cta-row{display:flex;gap:var(--sp2);justify-content:center;margin-bottom:var(--sp7)}
-.btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;padding:13px 24px;border-radius:999px}
-.btn-dark{background:var(--main);color:var(--bg)}
-.btn-ghost{background:var(--card);color:var(--ink);box-shadow:0 2px 8px rgba(22,21,19,.06)}
-.visual-card{overflow:hidden;aspect-ratio:21/9;padding:0}
-.visual-card img{width:100%;height:100%;object-fit:cover}
+/* ---------- ABOUT : 사진 호버 시 키워드 ---------- */
+.about-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:center}
+.about-copy{grid-column:1/span 5}
+.about-copy h2{font-size:clamp(40px,5vw,64px);font-weight:800;letter-spacing:-.02em;line-height:1.05;margin:var(--sp2) 0 var(--sp4)}
+.about-copy p{font-size:15.5px;color:var(--ink-soft);max-width:460px}
+.about-copy p + p{margin-top:var(--sp2)}
+.facts{display:flex;flex-wrap:wrap;gap:var(--sp2);margin-top:var(--sp4)}
+.facts span{font-size:12.5px;font-weight:700;border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.collage{grid-column:7/span 6;display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:70px;gap:12px}
+.kw{position:relative;overflow:hidden;border-radius:16px}
+.kw .ph{position:absolute;inset:0;border-radius:0;transition:transform .5s ease}
+.kw b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;background:rgba(17,17,17,.45);opacity:0;transition:opacity .35s ease;z-index:1}
+.kw:hover b,.kw:focus-visible b{opacity:1}
+.kw:hover .ph{transform:scale(1.06)}
+.kw:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.kw:nth-child(1){grid-column:1/span 2;grid-row:span 3}
+.kw:nth-child(2){grid-column:3/span 2;grid-row:span 2;margin-top:var(--sp4)}
+.kw:nth-child(3){grid-column:5/span 2;grid-row:span 3}
+.kw:nth-child(4){grid-column:1/span 3;grid-row:span 2}
+.kw:nth-child(5){grid-column:4/span 1;grid-row:span 2}
+.kw:nth-child(6){grid-column:5/span 2;grid-row:span 2}
 
-/* ---------- bento grid ---------- */
-.sec{padding:var(--sp7) 0}
-.sec-center{text-align:center;margin-bottom:var(--sp6)}
-.sec-center h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;letter-spacing:-.01em}
-.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut)}
-.b-about-photo{grid-column:1/span 4;aspect-ratio:4/5;padding:0;overflow:hidden}
-.b-about-photo img{width:100%;height:100%;object-fit:cover}
-.b-about-copy{grid-column:5/span 8;display:flex;flex-direction:column;justify-content:center}
-.b-about-copy h3{font-size:24px;font-weight:800;line-height:1.4;margin-bottom:var(--sp3)}
-.b-about-copy p{font-size:14.5px;color:var(--ink-soft);margin-bottom:var(--sp4)}
-.b-about-copy .btn{align-self:flex-start}
+/* ---------- MEMBERS : 배경 먼저, 이름 순서대로 등장 ---------- */
+.members{position:relative;overflow:hidden}
+.members::before{content:"";position:absolute;inset:0;background:var(--dream);opacity:0;transition:opacity 1s ease}
+.members.in::before{opacity:.55}
+.members .shell{position:relative}
+.members-wrap{display:flex;align-items:center;min-height:420px}
+.names{display:flex;flex-wrap:wrap;gap:var(--sp2) var(--sp5);margin-top:var(--sp4)}
+.name{font-size:clamp(40px,6vw,88px);font-weight:800;letter-spacing:-.02em;line-height:1.1;opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease,color .2s}
+.members.in .name{opacity:1;transform:none}
+.members.in .name:nth-child(1){transition-delay:.6s,.6s,0s}
+.members.in .name:nth-child(2){transition-delay:.72s,.72s,0s}
+.members.in .name:nth-child(3){transition-delay:.84s,.84s,0s}
+.members.in .name:nth-child(4){transition-delay:.96s,.96s,0s}
+.members.in .name:nth-child(5){transition-delay:1.08s,1.08s,0s}
+.members.in .name:nth-child(6){transition-delay:1.2s,1.2s,0s}
+.name:hover,.name:focus-visible,.name.on{color:var(--accent);outline:none}
+/* 카드는 마우스 위치를 따라다님 (호버하지 않을 때는 숨김) */
+.member-card{position:fixed;left:0;top:0;z-index:100;width:220px;background:var(--bg);border-radius:20px;padding:var(--sp2);box-shadow:0 20px 40px rgba(0,0,0,.14);opacity:0;visibility:hidden;scale:.92;transition:opacity .2s ease,scale .2s ease,visibility 0s .2s;pointer-events:none}
+.member-card.show{opacity:1;visibility:visible;scale:1;transition:opacity .2s ease,scale .2s ease}
+.member-card .ph{aspect-ratio:3/4}
+.member-card .info{padding:var(--sp3) var(--sp2) var(--sp2)}
+.member-card h3{font-size:22px;font-weight:800;margin-bottom:var(--sp2)}
+.member-card dl{display:grid;grid-template-columns:auto 1fr;gap:6px var(--sp3);font-size:13.5px}
+.member-card dt{color:var(--ink-soft)}
+.member-card dd{font-weight:700}
 
-.b-info{grid-column:1/span 6}
-.b-career{grid-column:7/span 6}
-.card h4{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:var(--sp4)}
-.info-item{display:flex;justify-content:space-between;padding:20px 0;border-bottom:1px solid var(--line)}
-.info-item:last-child{border-bottom:0}
-.info-item .lbl{font-size:13.5px;color:var(--ink-soft)}
-.info-item .val{font-size:15px;font-weight:700}
-.career-item{padding:12px 0;border-bottom:1px solid var(--line)}
-.career-item:last-child{border-bottom:0}
-.career-item .yr{font-size:12px;font-weight:700;color:var(--main);display:block;margin-bottom:3px}
-.career-item .org{font-size:15px;font-weight:700}
-.career-item .role{font-size:13px;color:var(--ink-soft);margin-left:6px}
+/* ---------- ALBUMS : 커버 / 정보 / 다른 앨범 자동 스크롤 ---------- */
+.album-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-top:var(--sp5);align-items:start}
+.album-cover{grid-column:1/span 4}
+.album-cover .ph{aspect-ratio:1/1;border-radius:20px}
+.album-info{grid-column:5/span 6;border-left:1px solid var(--line);padding-left:var(--sp4)}
+.album-type{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--accent)}
+.album-info h3{font-size:36px;font-weight:800;letter-spacing:-.01em;margin:var(--sp1) 0 var(--sp3)}
+.album-info .intro{font-size:15px;color:var(--ink-soft);max-width:520px;margin-bottom:var(--sp4)}
+.tracks{list-style:none;border-top:1px solid var(--line)}
+.tracks li{display:flex;gap:var(--sp3);padding:12px 0;border-bottom:1px solid var(--line);font-size:14.5px;font-weight:600}
+.tracks li span{width:24px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.album-list{grid-column:11/span 2;display:flex;flex-direction:column;align-items:center;gap:var(--sp2)}
+.album-list .label{align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--ink-soft)}
+.album-view{width:100%;height:400px;overflow:hidden}
+.album-track{display:flex;flex-direction:column;gap:14px;transition:transform .45s ease}
+.album-arrow{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;transition:background .2s,color .2s,border-color .2s}
+.album-arrow:hover:not(:disabled),.album-arrow:focus-visible{background:var(--ink);color:var(--bg);border-color:var(--ink);outline:none}
+.album-arrow:disabled{opacity:.3;cursor:default}
+.album-thumb{display:block;width:100%;text-align:left}
+.album-thumb .ph{aspect-ratio:1/1;border-radius:12px;transition:transform .3s}
+.album-thumb:hover .ph,.album-thumb:focus-visible .ph{transform:scale(.96)}
+.album-thumb small{display:block;font-size:12px;font-weight:700;margin-top:6px}
+.album-thumb.on .ph{outline:2px solid var(--ink);outline-offset:3px}
 
-/* ---------- skill ---------- */
-.chip{text-align:left;padding:var(--sp4);grid-column:span 4}
-.chip .nm{font-size:15.5px;font-weight:800;margin-bottom:8px}
-.chip .dsc{font-size:12.5px;color:var(--ink-soft);line-height:1.5}
+/* ---------- AWARDS : 가로 자동 스크롤 ---------- */
+.awards-rail{margin-top:var(--sp5);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.awards-track{display:flex;gap:var(--sp4);width:max-content;animation:slide 40s linear infinite}
+.awards-rail:hover .awards-track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.award{display:flex;gap:var(--sp3);align-items:flex-end;width:380px}
+.award .ph{width:200px;aspect-ratio:4/5;flex-shrink:0}
+.award .yr{font-size:12px;font-weight:800;color:var(--accent)}
+.award h3{font-size:17px;font-weight:800;margin:var(--sp1) 0}
+.award p{font-size:13.5px;color:var(--ink-soft)}
 
-/* ---------- projects (준비 중) ---------- */
-.b-proj{grid-column:span 4;padding:0;overflow:hidden;display:flex;flex-direction:column}
-.b-proj .pimg{aspect-ratio:4/3;background:var(--pill-bg);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--ink-soft)}
-.b-proj .pbody{padding:var(--sp4);display:flex;align-items:center;justify-content:space-between}
-.b-proj .pyear{font-size:11.5px;font-weight:700;color:var(--main)}
-.b-proj h3{font-size:17px;font-weight:800;margin-top:6px}
-.arrow-circ{width:34px;height:34px;border-radius:50%;background:var(--bg);color:var(--ink-soft);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+/* ---------- FOOTER / OFFICIAL ---------- */
+footer.site{border-top:1px solid var(--line);padding:var(--sp6) 0}
+footer.site .shell{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--sp4);flex-wrap:wrap}
+.fbrand small{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--ink-soft)}
+.fbrand b{display:block;font-size:28px;font-weight:800;letter-spacing:-.01em}
+.official{display:flex;flex-direction:column;align-items:flex-end;gap:var(--sp3)}
+.official .site-link{font-size:13px;font-weight:700;border:1px solid var(--ink);border-radius:999px;padding:10px 22px}
+.official .site-link:hover{background:var(--ink);color:var(--bg)}
+.socials{display:flex;gap:var(--sp2)}
+.socials a{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:800}
+.socials a:hover{border-color:var(--accent);color:var(--accent)}
+.copy{font-size:12px;color:var(--ink-soft);margin-top:var(--sp4)}
 
-/* ---------- board ---------- */
-.b-board{grid-column:1/span 12}
-.board-note{font-size:13.5px;color:var(--ink-soft);margin-bottom:var(--sp4);max-width:560px}
-.board-row{display:flex;align-items:center;gap:18px;padding:18px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.board-row:last-child{border-bottom:0}
-.board-row .bd{font-size:11px;font-weight:800;background:var(--pill-bg);color:var(--main);padding:5px 12px;border-radius:999px;flex-shrink:0;white-space:nowrap}
-.board-row .bt{flex:1;min-width:120px;font-size:14.5px;font-weight:700}
-.board-row .bm{font-size:12.5px;color:var(--ink-soft)}
-
-/* ---------- contact ---------- */
-.b-contact-copy{grid-column:1/span 5;display:flex;flex-direction:column;justify-content:center}
-.b-contact-copy h3{font-size:26px;font-weight:800;line-height:1.4;margin-bottom:var(--sp3)}
-.b-contact-copy p{font-size:14.5px;color:var(--ink-soft)}
-.b-contact-form{grid-column:6/span 7}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp3)}
-.field{margin-bottom:var(--sp3)}
-.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}
-.field input, .field textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:13px 14px;font-family:inherit;font-size:14px;color:var(--ink);background:var(--bg)}
-.field input:focus, .field textarea:focus{outline:none;border-color:var(--main)}
-
-/* ---------- footer ---------- */
-footer.site{padding:var(--sp2) 0 var(--sp7)}
-footer.site .shell{background:var(--card);border-radius:22px;display:flex;align-items:center;justify-content:space-between;padding:var(--sp4) var(--sp5)}
-.fbrand{font-size:14px;font-weight:800;color:var(--main)}
-.frole{font-size:12px;color:var(--ink-soft);margin-left:8px}
-.socials{display:flex;gap:var(--sp3)}
-.socials a{width:34px;height:34px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:13px}
-.socials a:hover{background:var(--main);color:var(--bg)}
-
-@media(max-width:960px){
-  nav.main{display:none}
-  header.site .shell{grid-template-columns:1fr auto}
-  .b-about-photo,.b-about-copy,.b-info,.b-career,.b-proj{grid-column:1/-1}
-  .chip{grid-column:span 6}
-  .b-contact-copy,.b-contact-form{grid-column:1/-1}
-  .field-row{grid-template-columns:1fr}
-  .board-row{gap:10px}
-  .board-row .bm{width:100%;order:3}
+@media (max-width:960px){
+  .about-copy,.collage{grid-column:1/-1}
+  .collage{margin-top:var(--sp5)}
+  .member-card{width:180px}
+  .album-cover{grid-column:1/-1;max-width:360px}
+  .album-info{grid-column:1/-1;border-left:0;padding-left:0}
+  .album-list{grid-column:1/-1}
+  .album-view{height:auto;overflow-x:auto}
+  .album-track{flex-direction:row;transform:none!important}
+  .album-arrow{display:none}
+  .album-thumb{width:120px;flex-shrink:0}
+  .award{width:300px}
+  .award .ph{width:150px}
+  .official{align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal,.name{opacity:1!important;transform:none!important}
 }
 </style>
 </head>
 <body>
 
-<header class="site">
-  <div class="shell">
-    <div class="logo">이채원</div>
-    <nav class="main">
-      <a href="#about">소개</a>
-      <a href="#skill">스킬</a>
-      <a href="#project">포트폴리오</a>
-      <a href="#board">게시판</a>
-      <a href="#contact">문의</a>
-    </nav>
-    <a href="#contact" class="cta-btn">문의하기 →</a>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="shell">
-    <span class="pill">PORTFOLIO</span>
-    <h1>늘 사용자를 생각하는<br>UIUX 디자이너가 되겠습니다</h1>
-    <p>이채원의 포트폴리오입니다.</p>
-    <div class="cta-row">
-      <a href="#project" class="btn btn-dark">포트폴리오 보기 →</a>
-      <a href="#about" class="btn btn-ghost">소개 더 보기</a>
+<!-- ============ HERO : 최신 MV (자동재생, 스크롤하면 사라짐) ============ -->
+<section class="hero" id="top">
+  <div class="hero-stage" id="heroStage">
+    <!-- MV 영상이 준비되면 아래 div 안에 넣어주세요:
+         <video src="video/ode-to-love.mp4" autoplay muted loop playsinline></video> -->
+    <div class="ph hero-video" data-label="MV PLACEHOLDER"></div>
+    <div class="hero-copy">
+      <h1>NCT WISH</h1>
+      <p>ODE TO LOVE MV</p>
     </div>
-    <div class="card visual-card reveal">
-      <img src="img/visual.jpg" alt="">
-    </div>
+    <span class="scroll-hint">SCROLL</span>
   </div>
 </section>
 
+<!-- ============ ABOUT ============ -->
 <section class="sec" id="about">
-  <div class="shell">
-    <div class="sec-center">
-      <span class="pill">ABOUT</span>
-      <h2>안녕하세요, 이채원입니다</h2>
-    </div>
-    <div class="bento" style="margin-bottom:var(--gut)">
-      <div class="card b-about-photo reveal"><img src="img/profile.jpg" alt="이채원"></div>
-      <div class="card b-about-copy reveal">
-        <h3>늘 사용자를 생각하는<br>UIUX 디자이너 이채원입니다.</h3>
-        <p>사용자가 무엇을 불편해하고 무엇을 원하는지부터 생각하며 화면을 설계합니다.</p>
-        <a href="#contact" class="btn btn-dark">문의하기 →</a>
+  <div class="shell about-grid">
+    <div class="about-copy reveal">
+      <div class="sec-eyebrow">ABOUT</div>
+      <h2>NCT WISH</h2>
+      <p>NCT WISH는 SM엔터테인먼트 NCT의 유닛으로, 이름처럼 ‘WISH(소망)’를 노래합니다.</p>
+      <p>꿈과 희망을 향해 나아가는 소년들의 이야기를 밝고 맑은 음악으로 전합니다.</p>
+      <div class="facts">
+        <span>DEBUT 2024.02.21</span>
+        <span>6 MEMBERS</span>
+        <span>SM ENTERTAINMENT</span>
       </div>
     </div>
-    <div class="bento">
-      <div class="card b-info reveal">
-        <h4>INFO</h4>
-        <div class="info-item"><span class="lbl">이름</span><span class="val">이채원</span></div>
-        <div class="info-item"><span class="lbl">분야</span><span class="val">UIUX 디자인</span></div>
-      </div>
-      <div class="card b-career reveal">
-        <h4>경력 · 학력</h4>
-        <div class="career-item"><span class="yr">[기간]</span><span class="org">[기관명]</span><span class="role">[과정 · 역할]</span></div>
-        <div class="career-item"><span class="yr">[기간]</span><span class="org">[학교명]</span><span class="role">[전공 · 졸업 여부]</span></div>
-        <div class="career-item"><span class="yr">[기간]</span><span class="org">[자격증명]</span><span class="role">[취득]</span></div>
-      </div>
+    <div class="collage reveal">
+      <a class="kw" tabindex="0"><div class="ph" data-label="PHOTO"></div><b>꿈</b></a>
+      <a class="kw" tabindex="0"><div class="ph" data-label="PHOTO"></div><b>희망</b></a>
+      <a class="kw" tabindex="0"><div class="ph" data-label="PHOTO"></div><b>소년미</b></a>
+      <a class="kw" tabindex="0"><div class="ph" data-label="PHOTO"></div><b>드림코어</b></a>
+      <a class="kw" tabindex="0"><div class="ph" data-label="PHOTO"></div><b>청량</b></a>
+      <a class="kw" tabindex="0"><div class="ph" data-label="PHOTO"></div><b>엔젤코어</b></a>
     </div>
   </div>
 </section>
 
-<section class="sec" id="skill">
+<!-- ============ MEMBERS : 이름 호버 시 멤버 카드 ============ -->
+<section class="sec members" id="members">
   <div class="shell">
-    <div class="sec-center">
-      <span class="pill">SKILL</span>
-      <h2>다룰 수 있는 것들</h2>
-    </div>
-    <div class="bento">
-      <div class="card chip reveal"><div class="nm">[스킬 1]</div><div class="dsc">[이 도구로 할 수 있는 일을 한 줄로 적어주세요.]</div></div>
-      <div class="card chip reveal"><div class="nm">[스킬 2]</div><div class="dsc">[이 도구로 할 수 있는 일을 한 줄로 적어주세요.]</div></div>
-      <div class="card chip reveal"><div class="nm">[스킬 3]</div><div class="dsc">[이 도구로 할 수 있는 일을 한 줄로 적어주세요.]</div></div>
-      <div class="card chip reveal"><div class="nm">[스킬 4]</div><div class="dsc">[이 도구로 할 수 있는 일을 한 줄로 적어주세요.]</div></div>
-      <div class="card chip reveal"><div class="nm">[스킬 5]</div><div class="dsc">[이 도구로 할 수 있는 일을 한 줄로 적어주세요.]</div></div>
-      <div class="card chip reveal"><div class="nm">[스킬 6]</div><div class="dsc">[이 도구로 할 수 있는 일을 한 줄로 적어주세요.]</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="project">
-  <div class="shell">
-    <div class="sec-center">
-      <span class="pill">PORTFOLIO</span>
-      <h2>주요 프로젝트</h2>
-    </div>
-    <div class="bento">
-      <div class="card b-proj reveal">
-        <div class="pimg">COMING SOON</div>
-        <div class="pbody"><div><span class="pyear">01</span><h3>프로젝트 준비 중</h3></div><div class="arrow-circ">→</div></div>
+    <div class="sec-eyebrow">MEMBERS</div>
+    <div class="members-wrap">
+      <div class="names" id="names">
+        <button class="name" data-i="0">SION</button>
+        <button class="name" data-i="1">RIKU</button>
+        <button class="name" data-i="2">YUSHI</button>
+        <button class="name" data-i="3">JAEHEE</button>
+        <button class="name" data-i="4">RYO</button>
+        <button class="name" data-i="5">SAKUYA</button>
       </div>
-      <div class="card b-proj reveal">
-        <div class="pimg">COMING SOON</div>
-        <div class="pbody"><div><span class="pyear">02</span><h3>프로젝트 준비 중</h3></div><div class="arrow-circ">→</div></div>
-      </div>
-      <div class="card b-proj reveal">
-        <div class="pimg">COMING SOON</div>
-        <div class="pbody"><div><span class="pyear">03</span><h3>프로젝트 준비 중</h3></div><div class="arrow-circ">→</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="board">
-  <div class="shell">
-    <div class="sec-center">
-      <span class="pill">BOARD</span>
-      <h2>게시판</h2>
-    </div>
-    <div class="bento">
-      <div class="card b-board reveal">
-        <p class="board-note">작업하면서 남긴 글들입니다.</p>
-        <div class="board-row"><span class="bd">[말머리]</span><span class="bt">[글 제목]</span><span class="bm">[YYYY.MM.DD]</span></div>
-        <div class="board-row"><span class="bd">[말머리]</span><span class="bt">[글 제목]</span><span class="bm">[YYYY.MM.DD]</span></div>
-        <div class="board-row"><span class="bd">[말머리]</span><span class="bt">[글 제목]</span><span class="bm">[YYYY.MM.DD]</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="contact">
-  <div class="shell">
-    <div class="card">
-      <div class="bento">
-        <div class="b-contact-copy">
-          <span class="pill" style="align-self:flex-start">CONTACT</span>
-          <h3>함께 좋은<br>프로젝트를<br>만들어보세요.</h3>
-          <p>프로젝트 또는 협업 문의를 남겨주세요.<br>빠르게 답변드리겠습니다.</p>
+      <div class="member-card" id="memberCard" aria-live="polite">
+        <div class="ph" data-label="MEMBER PHOTO"></div>
+        <div class="info">
+          <h3 id="mName">SION</h3>
+          <dl>
+            <dt>국적</dt><dd id="mNation">대한민국</dd>
+            <dt>생년월일</dt><dd id="mBirth">2002.05.11</dd>
+          </dl>
         </div>
-        <form class="b-contact-form">
-          <div class="field-row">
-            <div class="field"><label>이름</label><input type="text" placeholder="이름을 입력해주세요."></div>
-            <div class="field"><label>이메일</label><input type="email" placeholder="이메일을 입력해주세요."></div>
-          </div>
-          <div class="field"><label>문의 내용</label><textarea rows="5" placeholder="문의 내용을 입력해주세요."></textarea></div>
-          <button type="submit" class="btn btn-dark" style="border:0;cursor:pointer">문의 보내기 →</button>
-        </form>
       </div>
     </div>
   </div>
 </section>
 
-<footer class="site">
+<!-- ============ ALBUMS ============ -->
+<section class="sec" id="albums">
   <div class="shell">
-    <div style="display:flex;align-items:baseline">
-      <span class="fbrand">이채원</span><span class="frole">UIUX Portfolio</span>
-    </div>
-    <div class="socials">
-      <!-- href를 본인 GitHub 주소, 이메일(mailto:)로 바꿔주세요 -->
-      <a href="#" aria-label="GitHub">GH</a>
-      <a href="#" aria-label="이메일">@</a>
+    <div class="sec-eyebrow">ALBUMS</div>
+    <div class="sec-title">디스코그래피</div>
+    <div class="album-grid">
+      <div class="album-cover reveal"><div class="ph" data-label="ALBUM COVER"></div></div>
+      <div class="album-info reveal">
+        <span class="album-type" id="aType"></span>
+        <h3 id="aName"></h3>
+        <p class="intro" id="aIntro"></p>
+        <ol class="tracks" id="aTracks"></ol>
+      </div>
+      <div class="album-list">
+        <div class="label">다른 앨범</div>
+        <button class="album-arrow" id="albumUp" aria-label="이전 앨범">↑</button>
+        <div class="album-view"><div class="album-track" id="albumTrack"></div></div>
+        <button class="album-arrow" id="albumDown" aria-label="다음 앨범">↓</button>
+      </div>
     </div>
   </div>
+</section>
+
+<!-- ============ AWARDS ============ -->
+<section class="sec" id="awards">
+  <div class="shell">
+    <div class="sec-eyebrow">AWARDS &amp; ACHIEVEMENTS</div>
+    <div class="sec-title">수상 이력 · 주요 기록</div>
+  </div>
+  <div class="awards-rail">
+    <div class="awards-track" id="awardsTrack"></div>
+  </div>
+</section>
+
+<!-- ============ OFFICIAL / FOOTER ============ -->
+<footer class="site" id="official">
+  <div class="shell">
+    <div class="fbrand">
+      <small>SM ENTERTAINMENT</small>
+      <b>NCT WISH</b>
+    </div>
+    <div class="official">
+      <!-- href를 실제 공식 주소로 바꿔주세요 -->
+      <a href="#" class="site-link">OFFICIAL SITE →</a>
+      <div class="socials">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="X">X</a>
+        <a href="#" aria-label="YouTube">YT</a>
+        <a href="#" aria-label="Spotify">SP</a>
+      </div>
+    </div>
+  </div>
+  <div class="shell"><p class="copy">이 페이지는 팬 프로젝트로 제작된 비공식 페이지입니다.</p></div>
 </footer>
 
 <script>
-const els = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-}, {threshold:0.12});
-els.forEach(el=>io.observe(el));
+/* 멤버 정보 */
+const members = [
+  {name:'SION',   nation:'대한민국', birth:'2002.05.11'},
+  {name:'RIKU',   nation:'일본',     birth:'2003.06.28'},
+  {name:'YUSHI',  nation:'일본',     birth:'2004.04.05'},
+  {name:'JAEHEE', nation:'대한민국', birth:'2005.06.21'},
+  {name:'RYO',    nation:'일본',     birth:'2007.08.04'},
+  {name:'SAKUYA', nation:'일본',     birth:'2007.11.18'}
+];
+
+/* 앨범 정보 — 소개·트랙리스트는 대괄호 부분을 채워주세요 */
+const albums = [
+  {name:'poppop',   type:'MINI ALBUM · 2025', intro:'[앨범 소개를 적어주세요.]', tracks:['poppop','[트랙 2]','[트랙 3]','[트랙 4]']},
+  {name:'Wishful',  type:'SINGLE · 2024',     intro:'[앨범 소개를 적어주세요.]', tracks:['[트랙 1]','[트랙 2]']},
+  {name:'Steady',   type:'MINI ALBUM · 2024', intro:'[앨범 소개를 적어주세요.]', tracks:['Steady','[트랙 2]','[트랙 3]','[트랙 4]']},
+  {name:'Songbird', type:'SINGLE · 2024',     intro:'[앨범 소개를 적어주세요.]', tracks:['Songbird','[트랙 2]']},
+  {name:'WISH',     type:'SINGLE · 2024',     intro:'[앨범 소개를 적어주세요.]', tracks:['WISH','[트랙 2]']}
+];
+
+/* 수상 이력 — 전부 자리표시입니다 */
+const awards = Array.from({length:6},()=>({yr:'[YYYY]', title:'[시상식명]', desc:'[수상 부문]'}));
+
+/* reveal */
+const io = new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+}),{threshold:.2});
+document.querySelectorAll('.reveal,.members').forEach(el=>io.observe(el));
+
+/* HERO: 스크롤할수록 흐려지고 작아짐 */
+const stage = document.getElementById('heroStage');
+function onScroll(){
+  const p = Math.min(window.scrollY / (window.innerHeight * .8), 1);
+  stage.style.opacity = 1 - p;
+  stage.style.transform = `scale(${1 - p * .08})`;
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+/* MEMBERS: 이름에 마우스를 올리면 마우스 옆에 카드 표시 */
+const card = document.getElementById('memberCard');
+const names = document.querySelectorAll('.name');
+const GAP = 18;
+function placeCard(x, y){
+  // 화면 밖으로 나가지 않도록 오른쪽·아래가 모자라면 반대쪽에 띄움
+  const w = card.offsetWidth, h = card.offsetHeight;
+  let left = x + GAP, top = y + GAP;
+  if(left + w > window.innerWidth - 8) left = x - w - GAP;
+  if(top + h > window.innerHeight - 8) top = y - h - GAP;
+  card.style.left = Math.max(8, left) + 'px';
+  card.style.top = Math.max(8, top) + 'px';
+}
+function showMember(i){
+  const m = members[i];
+  document.getElementById('mName').textContent = m.name;
+  document.getElementById('mNation').textContent = m.nation;
+  document.getElementById('mBirth').textContent = m.birth;
+  names.forEach(n=>n.classList.toggle('on', n.dataset.i == i));
+  card.classList.add('show');
+}
+function hideMember(){ card.classList.remove('show'); names.forEach(n=>n.classList.remove('on')); }
+function placeNear(el){ const r = el.getBoundingClientRect(); placeCard(r.right - GAP, r.top + r.height / 2); }
+names.forEach(n=>{
+  n.addEventListener('mouseenter', e=>{ showMember(n.dataset.i); placeCard(e.clientX, e.clientY); });
+  n.addEventListener('mousemove', e=>placeCard(e.clientX, e.clientY));
+  n.addEventListener('mouseleave', hideMember);
+  n.addEventListener('focus', ()=>{ showMember(n.dataset.i); placeNear(n); });
+  n.addEventListener('blur', hideMember);
+  // 터치 기기: 탭하면 이름 옆에 카드 표시
+  n.addEventListener('click', e=>{ if(e.pointerType !== 'mouse'){ showMember(n.dataset.i); placeNear(n); } });
+});
+window.addEventListener('scroll', ()=>{ if(card.classList.contains('show') && !document.querySelector('.name:hover')) hideMember(); }, {passive:true});
+
+/* ALBUMS: 선택한 앨범 표시 + 오른쪽 목록은 화살표로 한 칸씩 이동 */
+function showAlbum(i){
+  const a = albums[i];
+  document.getElementById('aType').textContent = a.type;
+  document.getElementById('aName').textContent = a.name;
+  document.getElementById('aIntro').textContent = a.intro;
+  document.getElementById('aTracks').innerHTML = a.tracks.map((t,k)=>`<li><span>${String(k+1).padStart(2,'0')}</span>${t}</li>`).join('');
+  document.querySelectorAll('.album-thumb').forEach(b=>b.classList.toggle('on', b.dataset.i == i));
+}
+const thumb = (a,i) => `<button class="album-thumb" data-i="${i}"><div class="ph" data-label="COVER"></div><small>${a.name}</small></button>`;
+const track = document.getElementById('albumTrack');
+const view = track.parentElement;
+const up = document.getElementById('albumUp');
+const down = document.getElementById('albumDown');
+track.innerHTML = albums.map(thumb).join('');
+track.addEventListener('click', e=>{ const b = e.target.closest('.album-thumb'); if(b) showAlbum(b.dataset.i); });
+
+let pos = 0;
+function moveAlbums(step){
+  const items = track.children;
+  const max = Math.max(0, track.scrollHeight - view.clientHeight);
+  // 한 번 누를 때 썸네일 한 칸만큼 이동
+  const unit = items.length > 1 ? items[1].offsetTop - items[0].offsetTop : 0;
+  pos = Math.min(Math.max(pos + step * unit, 0), max);
+  track.style.transform = `translateY(${-pos}px)`;
+  up.disabled = pos <= 0;
+  down.disabled = pos >= max;
+}
+up.addEventListener('click', ()=>moveAlbums(-1));
+down.addEventListener('click', ()=>moveAlbums(1));
+window.addEventListener('resize', ()=>moveAlbums(0));
+showAlbum(0);
+moveAlbums(0);
+
+/* AWARDS: 가로로 흐르는 목록 (끊김 없이 두 번 반복) */
+const awardHTML = awards.map(a=>`<div class="award"><div class="ph" data-label="PHOTO"></div><div><div class="yr">${a.yr}</div><h3>${a.title}</h3><p>${a.desc}</p></div></div>`).join('');
+document.getElementById('awardsTrack').innerHTML = awardHTML + awardHTML.replaceAll('class="award"','class="award" aria-hidden="true"');
 </script>
 
 </body>
