@@ -84,6 +84,32 @@ section p + p{margin-top:10px}
 .ref .no{color:var(--ink-soft)}
 .ref .why{display:block;font-size:13px;color:var(--ink-soft);margin-top:2px}
 
+/* 디자인 시스템 (03 디자인 방향) */
+.ds{margin-top:32px;padding-top:28px;border-top:1px solid var(--line)}
+.ds + .ds{margin-top:28px}
+.sec-head + .ds{margin-top:0;padding-top:0;border-top:0}
+.ds h3{font-size:15px;font-weight:800;margin-bottom:12px;display:flex;align-items:baseline;gap:10px}
+.ds h3 small{font-size:13px;font-weight:500;color:var(--ink-soft)}
+.style-name{font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-bottom:10px}
+.style-points{list-style:none;display:grid;gap:8px;margin-top:14px}
+.style-points li{font-size:14.5px;color:var(--ink-soft);padding-left:18px;position:relative}
+.style-points li::before{content:"✦";position:absolute;left:0;color:var(--accent);font-size:11px;line-height:2.1}
+.style-points b{color:var(--ink);font-weight:700;margin-right:6px}
+.swatches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.swatch{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--paper)}
+.swatch i{display:block;height:84px}
+.swatch div{padding:12px 14px}
+.swatch b{display:block;font-size:14px;font-weight:800}
+.swatch code{font-family:inherit;font-size:12.5px;font-weight:700;color:var(--ink-soft);letter-spacing:.04em}
+.swatch span{display:block;font-size:13px;color:var(--ink-soft);margin-top:2px}
+.type-main{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 14px;background:var(--bg);border-radius:16px;padding:20px 22px;margin-bottom:12px}
+.type-main b{font-size:28px;font-weight:800;letter-spacing:-.01em}
+.type-main span{font-size:14px;color:var(--ink-soft)}
+.type-scale{list-style:none;border-top:1px solid var(--line)}
+.type-scale li{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line)}
+.type-scale .role{font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--ink-soft)}
+.type-scale .spec{font-size:12.5px;color:var(--ink-soft);white-space:nowrap}
+
 footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
 
 @media (max-width:720px){
@@ -92,6 +118,8 @@ footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
   section{padding:28px 22px;border-radius:20px}
   .grid{grid-template-columns:1fr}
   .flow li{grid-template-columns:1fr;gap:4px}
+  .swatches{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .type-scale li{grid-template-columns:1fr;gap:2px}
 }
 </style>
 </head>
@@ -116,6 +144,7 @@ footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
     <a href="#screen">05 페이지 구성</a>
     <a href="#goal">06 얻고 싶은 것</a>
     <a href="#ref">07 참고 사이트</a>
+    <a href="#style">08 디자인 스타일</a>
   </nav>
 
   <section id="bg">
@@ -212,6 +241,8 @@ footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
           <tr><td>06</td><td>여기저기 흩뿌려져 있는 작은 사진</td><td><a href="https://www.pinterest.com/pin/577868195973018615/" target="_blank" rel="noopener">보기 ↗</a></td></tr>
           <tr><td>07</td><td>자유로운 이미지 배치</td><td><a href="https://www.pinterest.com/pin/728949889726030318/" target="_blank" rel="noopener">보기 ↗</a></td></tr>
           <tr><td>08</td><td>정돈되어 있으면서도 다이내믹한 이미지 크기 대비와 배치</td><td><a href="https://www.pinterest.com/pin/1136384918501572611/" target="_blank" rel="noopener">보기 ↗</a></td></tr>
+          <tr><td>09</td><td>창의적인 이미지 배치</td><td><a href="https://www.pinterest.com/pin/661255157832927375/" target="_blank" rel="noopener">보기 ↗</a></td></tr>
+          <tr><td>10</td><td>유니크한 타이포그래피 콜라쥬</td><td><a href="https://www.pinterest.com/pin/669417932160338223/" target="_blank" rel="noopener">보기 ↗</a></td></tr>
         </tbody>
       </table></div>
     </div>
@@ -225,6 +256,51 @@ footer{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:40px}
           <tr><td><a href="https://ibighit.com/ko/txt/profile/" target="_blank" rel="noopener">TXT 프로필 ↗</a></td><td>그룹 소개 — 어떤 음악을 추구하는지, 그룹명의 의미</td><td class="no">투어 일정 및 예매<span class="why">SNS와 티켓 플랫폼에 이미 자세히 나와 있음</span></td></tr>
         </tbody>
       </table></div>
+    </div>
+  </section>
+
+  <section id="style">
+    <div class="sec-head"><span class="num">08</span><h2>디자인 스타일</h2></div>
+    <div class="ds">
+      <h3>스타일</h3>
+      <p class="style-name">볼드 타이포 에디토리얼</p>
+      <p>큰 영문 타이포그래피와 비대칭 사진 콜라주로 잡지 같은 리듬을 만들고, 스크롤과 호버에 반응하는 모션으로 아이돌 공식 사이트다운 생동감을 더한 스타일입니다.</p>
+      <ul class="style-points">
+        <li><b>큰 글자가 주인공</b>그룹명·멤버 이름을 화면을 채우는 굵은 영문 타이포로 보여줍니다.</li>
+        <li><b>비대칭 콜라주</b>크기와 높이가 다른 사진을 자유롭게 배치해 크기 대비를 만듭니다.</li>
+        <li><b>잡지식 정보 구성</b>작은 영문 라벨, 큰 제목, 얇은 구분선, 번호 리스트로 정보를 정리합니다.</li>
+        <li><b>키네틱 모션</b>스크롤·호버에 반응하는 등장 효과와 자동 스크롤로 생동감을 줍니다.</li>
+      </ul>
+    </div>
+
+    <div class="ds">
+      <h3>대표 색상 <small>기획서·기능정의서와 같은 컬러</small></h3>
+      <div class="swatches">
+        <div class="swatch"><i style="background:#2F4156"></i><div><b>대표색 · 네이비</b><code>#2F4156</code><span>버튼, 링크에만 사용 (한 화면에 가장 눈에 띄는 버튼 1개)</span></div></div>
+        <div class="swatch"><i style="background:#E6EEF5"></i><div><b>보조색 · 페일 블루</b><code>#E6EEF5</code><span>배경 면, 카드</span></div></div>
+        <div class="swatch"><i style="background:#567C8D"></i><div><b>액센트 · 슬레이트 블루</b><code>#567C8D</code><span>보조 글자, 라벨</span></div></div>
+      </div>
+    </div>
+
+    <div class="ds">
+      <h3>폰트 시스템</h3>
+      <div class="type-main"><b>Pretendard</b><span>메인 폰트 · 한글과 영문 모두 Pretendard 하나로 통일</span></div>
+      <ul class="type-scale">
+        <li><span class="role">DISPLAY</span><span style="font-size:28px;font-weight:800;letter-spacing:-.03em;line-height:1.1">NCT WISH</span><span class="spec">ExtraBold 800 · 56–160px</span></li>
+        <li><span class="role">TITLE</span><span style="font-size:22px;font-weight:800;letter-spacing:-.01em">디스코그래피</span><span class="spec">ExtraBold 800 · 31px</span></li>
+        <li><span class="role">LABEL</span><span style="font-size:12px;font-weight:800;letter-spacing:.12em">AWARDS &amp; ACHIEVEMENTS</span><span class="spec">ExtraBold 800 · 12px · 자간 넓게</span></li>
+        <li><span class="role">BODY</span><span style="font-size:16px;line-height:1.6">꿈과 희망을 향해 나아가는 소년들의 이야기</span><span class="spec">Regular 400 · 16px · 줄 간격 1.6</span></li>
+        <li><span class="role">SCALE</span><span>본문 16px에서 제목은 1.25배씩 커집니다.</span><span class="spec">16 · 20 · 25 · 31 · 39 · 49px</span></li>
+      </ul>
+    </div>
+
+    <div class="ds">
+      <h3>모양 · 간격</h3>
+      <ul class="type-scale">
+        <li><span class="role">RADIUS</span><span>버튼·카드·입력칸 모두 같은 둥글기</span><span class="spec">6px</span></li>
+        <li><span class="role">SPACING</span><span>여백과 간격은 10단위 값에서만 선택</span><span class="spec">10 · 20 · 30 · 40 · 60px</span></li>
+        <li><span class="role">BORDER</span><span>그림자 없이 테두리로 영역 구분</span><span class="spec">그림자 없음</span></li>
+      </ul>
     </div>
   </section>
 
