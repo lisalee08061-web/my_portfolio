@@ -1,0 +1,1175 @@
+/* design-style.md 기준
+   색: 글자 --ink #141414 · 보조 글자 --ink-soft #5b5b5b · 구분선 --line #e5e5e5 · 연한 면 --paper2 #f0f0f0 · 페이지 배경 흰색
+       포인트 배경 --pale #E6EEF5 (멤버 · 어워즈 · 푸터 섹션, 태그 칩) · 악센트 --point 네이비 #2F4156(버튼·링크) / --accent 틸 #2A6F72(라벨) / 선택된 멤버 이름은 #6888A5
+   글꼴: Pretendard, 제목 600(세미볼드, 최대 굵기) / 본문 400 · 글자 크기: 본문 16px, 1.25배 단계 · 줄 간격 1.6
+   모서리 6px · 간격 10단위(그리드 12칸, gap 24px만 예외) · 컨텐츠 폭 1440px · 그림자 없이 테두리로 구분 */
+:root{
+  --bg:#fff;
+  --pale:#E6EEF5;
+  --ink:#141414;
+  --ink-soft:#5b5b5b;
+  --line:#e5e5e5;
+  --paper2:#f0f0f0;
+  --point:#2F4156;
+  --accent:#2A6F72;
+  --fs-xs:12.8px;
+  --fs-sm:14px;  /* 푸터 글자 최소 크기 */
+  --fs-base:16px;
+  --fs-md:20px;
+  --fs-lg:25px;
+  --fs-xl:31.25px;
+  --fs-2xl:39px;
+  --fs-3xl:48.8px;
+  --fs-4xl:61px;
+  --fs-7xl:119.2px;
+  --radius:6px;
+  --content:1440px;
+  --header:60px;
+  --sp1:10px;
+  --sp2:20px;
+  --sp3:30px;
+  --sp4:40px;
+  --sp5:60px;
+  --sp6:80px;
+  --sp7:100px;
+  --sp8:120px;
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0}
+
+html{
+scroll-behavior:smooth;
+scroll-padding-top:var(--header)}
+
+body{
+font-family:'Pretendard',-apple-system,'Malgun Gothic',sans-serif;
+font-size:var(--fs-base);
+font-weight:400;
+color:var(--ink);
+background:var(--bg);
+line-height:1.6;
+-webkit-font-smoothing:antialiased;
+word-break:keep-all;
+overflow-wrap:break-word;
+overflow-x:hidden}
+
+img{
+max-width:100%;
+display:block}
+
+a{
+color:inherit;
+text-decoration:none}
+
+button{
+font:inherit;
+color:inherit;
+background:none;
+border:0;
+cursor:pointer}
+
+h1,h2,h3{
+font-weight:600}
+
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
+outline:2px solid var(--point);
+outline-offset:2px}
+
+.sr-only{
+position:absolute;
+width:1px;
+height:1px;
+padding:0;
+margin:-1px;
+overflow:hidden;
+clip:rect(0,0,0,0);
+white-space:nowrap;
+border:0}
+
+.shell{
+max-width:var(--content);
+margin:0 auto;
+padding:0 5%}
+
+.sec{
+padding:var(--sp7) 0}
+
+.sec-title{
+font-size:var(--fs-xl);
+letter-spacing:-.01em}
+
+/* 사진·영상 자리표시 */
+.ph{
+position:relative;
+background:var(--paper2);
+border-radius:var(--radius);
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center}
+
+.ph::after{
+content:attr(data-label);
+font-size:var(--fs-xs);
+letter-spacing:.1em;
+color:var(--ink)}
+
+/* reveal */
+.reveal{
+opacity:0;
+transform:translateY(20px);
+transition:opacity .6s ease,transform .6s ease}
+
+.reveal.in{
+opacity:1;
+transform:none}
+
+/* ---------- HEADER : 로고(왼쪽) + 메뉴 4개(오른쪽) ---------- */
+.site-header{
+position:sticky;
+top:0;
+z-index:50;
+background:var(--bg);
+border-bottom:1px solid var(--line)}
+
+.site-header .shell{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:var(--sp2);
+min-height:var(--header)}
+
+/* 헤더 로고: 검정 로고 이미지, 헤더 높이 안에 작게 */
+.logo{
+display:inline-flex;
+align-items:center;
+min-height:44px}
+
+.logo img{
+display:block;
+height:36px;
+width:auto}
+
+.site-header h1{
+display:flex}  /* h1로 감싸도 로고 높이·정렬이 그대로 유지되도록 */
+
+.gnb{
+display:flex;
+flex-wrap:wrap;
+gap:0 var(--sp3)}
+
+.gnb ul{
+display:flex;
+flex-wrap:wrap;
+gap:inherit;
+list-style:none}  /* ul/li로 감싸도 메뉴가 예전처럼 가로로 같은 간격 */
+
+.gnb li{
+display:flex}
+
+.gnb a{
+display:inline-flex;
+align-items:center;
+min-height:44px;
+font-size:var(--fs-xs);
+letter-spacing:.06em}
+
+.gnb a:hover{
+color:var(--point)}
+
+/* ---------- HERO : 폭 전체, 가로:세로 2:1, 가운데 큰 제목 / 스크롤하면 사라짐 ---------- */
+.hero{
+position:relative;
+height:50vw;
+min-height:320px;
+overflow:hidden}
+
+.hero-stage{
+position:relative;
+height:100%;
+overflow:hidden;
+will-change:opacity,transform}
+
+.hero-video{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+background:var(--paper2)}
+
+.hero-stage::after{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(20,20,20,.35);
+pointer-events:none}
+
+.hero-toggle{
+color:#fff}
+
+/* 히어로 로고: 영상 정가운데 NCT WISH 로고 이미지 (흰색 투명 PNG)
+   영상 묶음(.hero-stage) 밖에 두어서 스크롤할 때 영상만 흐려지고 로고는 그대로 */
+/* 로고: 영상을 가리지 않게 작게, 영상 아래쪽 가운데에 */
+.hero-title{
+position:absolute;
+left:0;
+right:0;
+bottom:var(--sp4);
+z-index:2;
+margin:0;
+display:flex;
+justify-content:center;
+padding:0 5%;
+pointer-events:none}
+
+.hero-title img{
+display:block;
+width:min(14vw,220px);
+height:auto}
+
+/* 멈춤/재생 버튼은 왼쪽 위 (아래쪽은 큰 제목 자리) */
+.hero-toggle{
+position:absolute;
+left:5%;
+top:var(--sp2);
+z-index:2;
+min-width:44px;
+min-height:44px;
+font-size:var(--fs-xs);
+letter-spacing:.2em}
+
+.hero-toggle:hover{
+text-decoration:underline}
+
+/* ---------- ABOUT : 타이포그래피 한 문장, 키워드마다 왼쪽에 사진 ----------
+   스케치: 2줄 왼쪽 정렬 / 레퍼런스: 사진이 글자 줄 안에 섞여 세로 가운데 정렬, 사진 크기는 제각각
+   사진 크기는 em 단위라 글자 크기에 맞춰 함께 커지고 작아짐 */
+/* 여백을 넉넉히: 섹션을 화면 높이의 80% 이상으로 두고 문장을 가운데에 */
+#about{
+min-height:100vh;
+padding:160px 0}  /* 여백을 넉넉히: 위아래 160px, 최소 화면 높이만큼 */
+
+/* 페일 블루 섹션: 멤버 · 어워즈 · 푸터 (헤더 · 키워드 · 디스코그래피 · 미디어 · 공지는 흰 바탕) */
+#awards{
+background:var(--pale)}
+
+.members{
+background:var(--pale)}  /* 멤버 섹션 바탕 = 페일 블루 #E6EEF5, 그 위에 배경 사진이 깔림 */
+
+#about .shell{
+width:100%}
+
+/* 문장: 왼쪽 위에 왼쪽 정렬, Pretendard Medium, 자간 좁게 */
+.kw-sentence{
+--kw-fs:clamp(26px,calc(2.4vw + 2.4px),36px);
+font-size:var(--kw-fs);
+font-weight:500;
+letter-spacing:-.04em;
+line-height:1.2}
+
+.kw-line{
+display:flex;
+flex-wrap:wrap;
+justify-content:flex-start;
+align-items:baseline;
+gap:.2em .3em}
+
+.kw-line + .kw-line{
+margin-top:.1em}
+
+/* strong 기본 굵기(bold) 대신 문장 굵기(500) 그대로 */
+.kw-line strong{
+font-weight:inherit}
+
+/* 문장 아래: 같은 크기 사진 5장을 한 줄로, 사진 위 왼쪽에 작은 키워드 라벨 (그리드 gap 24px) */
+.kw-gallery{
+display:grid;
+grid-template-columns:repeat(5,minmax(0,1fr));
+gap:24px;
+margin-top:var(--sp8);
+list-style:none}
+
+.kw-gallery .kw-label{
+display:block;
+white-space:nowrap;
+margin-bottom:var(--sp1);
+font-size:var(--fs-xs);
+letter-spacing:.08em;
+line-height:1.6;
+color:var(--ink-soft)}
+
+.kw-gallery .kw-frame{
+overflow:hidden}
+
+.kw-gallery img{
+display:block;
+width:100%;
+aspect-ratio:4/5;
+object-fit:cover;
+transition:transform .5s ease}
+
+.kw-gallery li:hover img{
+transform:scale(1.05)}
+
+/* 섹션에 도달하면 단어와 사진이 왼쪽부터 차례로 떠오름 (--i = 순서) */
+.kw-sentence .tok{
+opacity:0;
+transform:translateY(.4em);
+transition:opacity .6s ease,transform .6s ease;
+transition-delay:calc(var(--i) * 70ms)}
+
+/* 스크롤해서 지나갈 때: 단어·사진이 순서대로 위로 떠오르며 흐려지고 사라짐 (휘발)
+   --out = 지나간 정도 0~1 (JS가 스크롤에 맞춰 계산) / --tp = 각 조각의 진행도 (--i 순서만큼 조금씩 늦게 시작) */
+.kw-sentence.in .tok{
+--tp:clamp(0, calc(var(--out, 0) * 1.8 - var(--i) * .07), 1);
+opacity:calc(1 - var(--tp));
+transform:translateY(calc(var(--tp) * -60px));
+filter:blur(calc(var(--tp) * 6px))}
+
+/* 등장 애니메이션이 끝난 뒤에는 스크롤에 바로 반응하도록 지연 효과를 끔 */
+.kw-sentence.settled .tok{
+transition:none}
+
+/* 다음 섹션으로 스크롤할 때: 사진들이 왼쪽부터 하나씩 페이드아웃
+   --gout = 사진 줄이 위로 지나간 정도 0~1 (JS) / --k = 사진 순서 0~4 → 순서대로 조금씩 늦게 사라짐 */
+.kw-sentence.in .kw-gallery li.tok{
+--tp:clamp(0, calc(var(--gout, 0) * 2 - var(--k) * .25), 1);
+opacity:calc(1 - var(--tp));
+transform:translateY(calc(var(--tp) * -20px));
+filter:none}
+
+/* ---------- MEMBERS : 화면에 고정된 채 스크롤하면 오른쪽 사진이 다음 멤버로 바뀌고, 왼쪽 이름 색이 바뀜 ---------- */
+.members{
+position:relative;
+padding:0;
+height:460vh}
+
+.members-sticky{
+position:sticky;
+top:var(--header);
+height:calc(100vh - var(--header));
+overflow:hidden;
+display:grid;
+grid-template-columns:minmax(0,1fr) 43vw;
+padding-left:calc(max(0px,(100% - var(--content)) / 2) + 5%)}
+
+.members-names{
+position:relative;
+z-index:1;
+display:flex;
+align-items:center;
+padding:var(--sp5) var(--sp4) var(--sp5) 0}
+
+/* 이름 쪽(왼쪽) 배경: 페일 블루 바탕 위에 nctwish_bg1 사진을 30% 불투명도로 은은하게 (오른쪽 사진 칸 43vw는 제외) */
+.members-sticky::before{
+content:"";
+position:absolute;
+top:0;
+bottom:0;
+left:0;
+right:43vw;
+background:url("../Resources/nctwish_bg1.jpg") 50% 10%/cover no-repeat;
+opacity:.3;
+pointer-events:none}
+
+/* 사진 위에 페일 블루 레이어를 따로 덮어 이름이 더 눈에 띄게 (페일 블루 #E6EEF5, 80%) */
+.members-sticky::after{
+content:"";
+position:absolute;
+top:0;
+bottom:0;
+left:0;
+right:43vw;
+background:rgba(230,238,245,.8);
+pointer-events:none}
+
+.names{
+list-style:none;
+display:flex;
+flex-wrap:wrap;
+gap:0 var(--sp3)}
+
+.name{
+font-size:clamp(var(--fs-xl),3.6vw,var(--fs-3xl));
+font-weight:600;
+letter-spacing:-.02em;
+opacity:0;
+transform:translateY(30px);
+transition:opacity .7s ease,transform .7s ease,color .3s}
+
+.members-sticky.in .name{
+opacity:1;
+transform:none}
+
+.members-sticky.in .name:nth-child(1){
+transition-delay:.3s,.3s,0s}
+
+.members-sticky.in .name:nth-child(2){
+transition-delay:.42s,.42s,0s}
+
+.members-sticky.in .name:nth-child(3){
+transition-delay:.54s,.54s,0s}
+
+.members-sticky.in .name:nth-child(4){
+transition-delay:.66s,.66s,0s}
+
+.members-sticky.in .name:nth-child(5){
+transition-delay:.78s,.78s,0s}
+
+.members-sticky.in .name:nth-child(6){
+transition-delay:.9s,.9s,0s}
+
+.name.on{
+color:#6888A5}  /* 선택된 멤버: 회색빛 도는 스카이 블루 (페일 블루 배경 위 대비 3:1 이상) */
+
+.member-panel{
+position:relative;
+height:100%}
+
+.member-slide{
+position:absolute;
+inset:0;
+overflow:hidden;
+opacity:0;
+transition:opacity .5s ease}  /* 확대한 사진이 칸 밖으로 넘치지 않게 */
+
+.member-slide.on{
+opacity:1}
+
+.member-slide img{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover}
+
+/* 밝은 사진 위에서도 이름·정보가 읽히도록 아래쪽만 어둡게 */
+.member-slide::after{
+content:"";
+position:absolute;
+left:0;
+right:0;
+bottom:0;
+height:45%;
+background:linear-gradient(to top,rgba(20,20,20,.6),rgba(20,20,20,0))}
+
+.member-slide .info{
+position:absolute;
+left:0;
+bottom:0;
+z-index:1;
+padding:var(--sp4);
+color:#fff}
+
+.member-slide h3{
+font-size:var(--fs-xl);
+letter-spacing:-.01em}
+
+.member-slide p{
+font-size:var(--fs-md)}
+
+/* ---------- ALBUMS : 제목 / 커버 · 정보 · (빈 칸) · 썸네일 열 ---------- */
+.album-grid{
+display:grid;
+grid-template-columns:repeat(12,1fr);
+gap:var(--sp4) 24px;
+align-items:start}
+
+.album-head{
+grid-column:1/span 10;
+grid-row:1;
+align-self:center}
+
+.album-cover{
+grid-column:1/span 4;
+grid-row:2}
+
+.album-cover .cover-img{
+display:block;
+width:100%;
+aspect-ratio:1/1;
+object-fit:cover;
+border-radius:var(--radius);
+background:var(--paper2)}
+
+.album-thumb img{
+display:block;
+width:100%;
+aspect-ratio:1/1;
+object-fit:cover;
+border-radius:var(--radius);
+transition:transform .3s}
+
+.album-info{
+grid-column:5/span 4;
+grid-row:2;
+padding-left:var(--sp3)}
+
+.album-type{
+font-size:var(--fs-xs);
+letter-spacing:.08em;
+color:var(--accent)}
+
+.album-info h3{
+font-size:var(--fs-2xl);
+letter-spacing:-.01em;
+margin-bottom:var(--sp1)}
+
+.album-info .intro{
+color:var(--ink-soft);
+margin-bottom:var(--sp2)}
+
+.tracks{
+list-style:none}
+
+.tracks li{
+display:flex;
+gap:var(--sp2);
+padding:var(--sp1) 0;
+border-bottom:1px solid var(--line)}
+
+.tracks li span{
+width:24px;
+color:var(--ink-soft);
+font-variant-numeric:tabular-nums}
+
+/* 트랙은 4곡까지만 보여주고, 전체 정보는 MORE 링크로 앨범 정보 페이지에서 */
+.tracks li:nth-child(n+5){
+display:none}
+
+.more-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+width:100%;
+min-height:44px;
+margin-top:var(--sp1);
+font-size:var(--fs-xs);
+letter-spacing:.12em;
+text-align:center;
+color:var(--point)}
+
+.more-btn:hover{
+text-decoration:underline}
+
+.album-up{
+grid-column:11/span 2;
+grid-row:1;
+justify-self:center}
+
+.album-list{
+grid-column:11/span 2;
+grid-row:2;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:var(--sp1)}
+
+/* 썸네일 3개만 보이는 높이 = 썸네일 3개 + 사이 간격 2개 */
+.album-view{
+--thumb:clamp(80px,8vw,120px);
+width:var(--thumb);
+height:calc(var(--thumb) * 3 + var(--sp2) * 2);
+overflow:hidden}
+
+.album-track{
+display:flex;
+flex-direction:column;
+gap:var(--sp2);
+transition:transform .45s ease}
+
+.album-arrow{
+width:44px;
+height:44px;
+border-radius:var(--radius);
+border:1px solid var(--line);
+display:flex;
+align-items:center;
+justify-content:center;
+color:var(--point);
+transition:background .2s,color .2s,border-color .2s}
+
+.album-arrow:hover:not(:disabled){
+background:var(--point);
+color:#fff;
+border-color:var(--point)}
+
+.album-arrow:disabled{
+opacity:.3;
+cursor:default}
+
+.album-thumb{
+display:block;
+width:100%}
+
+.album-thumb:hover img,.album-thumb:focus-visible img{
+transform:scale(.96)}
+
+.album-thumb.on img{
+outline:2px solid var(--point);
+outline-offset:-2px}
+
+/* ---------- AWARDS : 가로 자동 스크롤 ---------- */
+.awards-rail{
+margin-top:var(--sp4);
+overflow:hidden;
+-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+
+.awards-track{
+display:flex;
+gap:var(--sp3);
+width:max-content;
+animation:slide 40s linear infinite}
+
+.awards-rail:hover .awards-track{
+animation-play-state:paused}
+
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* 카드: 위에 로고, 아래에 텍스트 (세로 배치). 로고 자리 높이를 같게 두어 텍스트 시작선이 맞음 */
+.award{
+display:flex;
+flex-direction:column;
+gap:var(--sp2);
+width:240px;
+text-align:center}  /* 연도 · 상 이름 · 설명 가운데 정렬 */
+
+.award-logo{
+height:120px;
+display:flex;
+align-items:center;
+justify-content:center;  /* 로고를 칸 가운데에 */
+background:var(--pale)}  /* 섹션과 같은 페일 블루라 칸은 안 보임. 흰 배경이 든 로고(blend)가 이 색에 섞이려면 바로 뒤에 색이 깔려 있어야 함 */
+
+.award-logo img{
+display:block;
+width:auto;
+max-width:100%;
+object-fit:contain}
+
+/* 흰 배경이 들어 있는 로고(서울가요대상, AAA)는 페이지 배경색에 섞이게 */
+.award-logo img.blend{
+mix-blend-mode:multiply}
+
+.award .yr{
+font-size:var(--fs-xs);
+color:var(--accent)}
+
+.award h3{
+font-size:var(--fs-md)}
+
+.award p{
+color:var(--ink-soft)}
+
+/* ---------- MEDIA : 왼쪽 큰 카드(영상) 1개 + 오른쪽 작은 카드(화보 모음집) 2×2 ----------
+   12칸 그리드: 큰 카드 6칸 × 2줄, 작은 카드 3칸 × 1줄 / 간격 = 그리드 gap 24px, 모서리 6px
+   큰 카드: 제목은 왼쪽 아래, 화살표는 오른쪽 아래 / 작은 카드: 제목은 왼쪽 위, 동그라미는 왼쪽 아래 */
+.media-board{
+display:grid;
+grid-template-columns:repeat(12,minmax(0,1fr));
+grid-template-rows:repeat(2,minmax(0,1fr));
+gap:24px;
+margin-top:var(--sp4)}
+
+.m-card{
+position:relative;
+display:flex;
+flex-direction:column;
+border-radius:var(--radius);
+overflow:hidden}
+
+.m-card::before{
+content:attr(data-label);
+position:absolute;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:var(--fs-xs);
+letter-spacing:.1em;
+opacity:.5}
+
+.m-video{
+grid-column:1/span 6;
+grid-row:1/span 2;
+aspect-ratio:5/4;
+justify-content:flex-end;
+padding:var(--sp3);
+background:var(--paper2);
+color:var(--ink)}
+
+/* 영상 카드: 카드 전체를 채우는 소리 없는 미리보기 영상 + 아래쪽만 어둡게 깔아 흰 제목이 읽히게 */
+.m-video video{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover}
+
+.m-video.has-video{
+color:#fff}
+
+.m-video.has-video::after{
+content:"";
+position:absolute;
+left:0;
+right:0;
+bottom:0;
+height:45%;
+background:linear-gradient(to top,rgba(20,20,20,.6),rgba(20,20,20,0))}
+
+.m-video .m-foot{
+position:relative;
+z-index:1;
+display:flex;
+align-items:flex-end;
+justify-content:space-between;
+gap:var(--sp2)}
+
+.m-video .m-title{
+font-size:var(--fs-lg);
+font-weight:500;
+line-height:1.3}
+
+.m-video .m-arrow{
+font-size:var(--fs-lg);
+transition:transform .3s ease}
+
+.m-video:hover .m-arrow{
+transform:translateX(var(--sp1))}
+
+.m-photo{
+grid-column:span 3;
+justify-content:space-between;
+padding:var(--sp2);
+background:var(--ink-soft);
+color:#fff}
+
+.m-photo .m-title{
+position:relative;
+font-size:var(--fs-base);
+line-height:1.4}
+
+.m-photo .m-dot{
+position:relative;
+width:24px;
+height:24px;
+border-radius:50%;
+background:rgba(255,255,255,.2)}
+
+.m-photo:hover{
+opacity:.9}
+
+/* 화보 사진: 카드를 꽉 채우고, 위쪽만 어둡게 깔아 왼쪽 위 흰 제목이 읽히게 */
+.m-photo img{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:0}
+
+/* 제목이 표지 글자와 겹쳐도 읽히도록 위쪽을 검정 그라데이션으로 충분히 어둡게 + 글자 그림자 */
+.m-photo.has-photo::before{
+content:"";
+z-index:1;
+background:linear-gradient(to bottom,rgba(0,0,0,.8) 0%,rgba(0,0,0,.45) 30%,rgba(0,0,0,0) 60%);
+opacity:1}
+
+.m-photo .m-title,.m-photo .m-dot{
+z-index:2}
+
+.m-photo .m-title{
+font-weight:500;
+text-shadow:0 1px 6px rgba(0,0,0,.5)}
+
+/* ---------- NOTICE : 제목 + 목록 4줄 ---------- */
+.sec-desc{
+color:var(--ink-soft);
+margin-top:var(--sp1)}
+
+.notice-band{
+margin-top:var(--sp4)}
+
+.notice-list{
+list-style:none;
+border-top:1px solid var(--line)}
+
+.notice-list li{
+border-bottom:1px solid var(--line)}
+
+.notice-list a{
+display:flex;
+align-items:center;
+gap:var(--sp2);
+min-height:44px;
+padding:var(--sp2) 0}
+
+.notice-list a:hover .n-title{
+color:var(--point);
+text-decoration:underline}
+
+.n-tag{
+flex:none;
+font-size:var(--fs-xs);
+color:var(--accent);
+background:var(--pale);  /* 공지 태그: 페일 블루 칩 + 틸 글자 */
+border:1px solid var(--pale);
+border-radius:var(--radius);
+padding:0 var(--sp1)}
+
+.n-title{
+flex:1;
+min-width:0}
+
+.n-date{
+flex:none;
+font-size:var(--fs-xs);
+color:var(--ink-soft);
+font-variant-numeric:tabular-nums}
+
+.notice-empty{
+padding:var(--sp2) 0;
+color:var(--ink-soft)}
+
+/* ---------- FOOTER : 왼쪽 위 로고 / 오른쪽 절반에 링크 3열, 그 아래 저작권 문구 + 소셜 아이콘 ---------- */
+footer.site{
+padding:var(--sp5) 0;
+background:var(--pale)}
+
+.footer-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+grid-template-areas:"logo cols" ". bottom";
+gap:var(--sp5) 24px}
+
+/* 푸터 로고: 검정 로고 이미지, 작게 */
+.f-logo{
+grid-area:logo;
+align-self:start;
+display:inline-block}
+
+.f-logo img{
+display:block;
+height:80px;
+width:auto}
+
+.f-cols{
+grid-area:cols;
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:24px}
+
+.f-col h2{
+font-size:var(--fs-base);
+margin-bottom:var(--sp1)}
+
+.f-col ul{
+list-style:none}
+
+.f-col a{
+display:inline-flex;
+align-items:center;
+min-height:30px;
+font-size:var(--fs-sm);
+color:var(--ink-soft)}
+
+.f-col a:hover{
+color:var(--point);
+text-decoration:underline}
+
+.f-bottom{
+grid-area:bottom;
+display:flex;
+flex-wrap:wrap;
+align-items:center;
+gap:0 var(--sp2)}
+
+.copy{
+font-size:var(--fs-sm);
+color:var(--ink-soft)}
+
+/* SNS 아이콘: 누르는 영역은 44px, 아이콘은 눈으로 볼 때 같은 크기가 되도록 각각 맞춤 (페이스북은 이미지 안 여백이 커서 크게) */
+.socials{
+display:flex;
+gap:var(--sp1)}
+
+.socials a{
+width:44px;
+height:44px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:var(--radius);
+transition:opacity .2s}
+
+.socials a:hover{
+opacity:.7}
+
+.socials img{
+display:block;
+width:auto}
+
+.socials .sns-ig,.socials .sns-x{
+height:26px}
+
+.socials .sns-yt{
+height:22px}
+
+.socials .sns-fb{
+height:44px}
+
+@media (max-width:960px){
+  .gnb{
+  gap:0 var(--sp2)}
+
+  .members-sticky{
+  grid-template-columns:1fr;
+  grid-template-rows:auto minmax(0,1fr);
+  padding-left:0}
+
+  .members-names{
+  padding:var(--sp2) 5%}
+
+  .members-sticky::before,.members-sticky::after{
+  right:0}
+
+  .name{
+  font-size:var(--fs-lg)}
+
+  .member-slide h3{
+  font-size:var(--fs-lg)}
+
+  .member-slide p{
+  font-size:var(--fs-base)}
+
+  .album-head,.album-info,.album-list{
+  grid-column:1/-1;
+  grid-row:auto}
+
+  .album-info{
+  padding-left:0}
+
+  .album-cover{
+  grid-column:1/-1;
+  grid-row:auto;
+  max-width:360px}
+
+  .album-view{
+  width:100%;
+  height:auto;
+  overflow-x:auto}
+
+  .album-track{
+  flex-direction:row;
+  transform:none!important}
+
+  .album-arrow{
+  display:none}
+
+  .album-thumb{
+  width:120px;
+  flex-shrink:0}
+
+  .award{
+  width:180px}
+
+  .award-logo{
+  height:90px}
+
+  .footer-grid{
+  grid-template-columns:1fr;
+  grid-template-areas:"logo" "cols" "bottom";
+  gap:var(--sp4)}
+
+  /* 키워드 사진: 좁은 화면에서는 가로로 밀어서 보기 (라벨이 잘리지 않게) */
+  .kw-gallery{
+  grid-template-columns:none;
+  grid-auto-flow:column;
+  grid-auto-columns:42%;
+  gap:var(--sp2);
+  overflow-x:auto;
+  scroll-snap-type:x mandatory}
+
+  .kw-gallery li{
+  scroll-snap-align:start}
+
+  /* 좁은 화면: 계단 배치 대신 2열로 쌓기 */
+  /* 좁은 화면: 큰 카드 위에 한 줄, 작은 카드 4개는 2×2 */
+  .media-board{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-rows:none;
+  gap:var(--sp2)}
+
+  .m-video{
+  grid-column:1/-1;
+  grid-row:auto;
+  aspect-ratio:4/3}
+
+  .m-photo{
+  grid-column:span 1;
+  aspect-ratio:1/1}
+}
+
+/* ---------- INTRO CAPTCHA : 처음 들어오면 화면 전체를 덮는 캡차 창 (364 × 552 = 원래 560 × 850의 65%) ----------
+   사진 칸을 고르면 SKIP → VERIFY 로 바뀌고, VERIFY 또는 SKIP 을 누르면 히어로로 넘어감. 새로고침하면 다시 뜸 */
+.captcha{
+--g-blue:#4A90E2;
+position:fixed;
+inset:0;
+z-index:1000;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:var(--sp2);
+transition:opacity .6s ease,visibility 0s .6s;
+/* 배경: 숲 사진 위에 흰색 60%를 덮어 캡차 창이 잘 보이게 */
+background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,.6)),url("../Resources/nctwish_bg1.jpeg") center/cover no-repeat #fff}
+
+.captcha.is-done{
+opacity:0;
+visibility:hidden}
+
+.captcha:focus{
+outline:none}
+
+html.captcha-open{
+overflow:hidden}
+
+.cap-card{
+display:flex;
+flex-direction:column;
+gap:6px;
+width:min(364px,100%);
+height:min(552px,100%);
+padding:var(--sp1);
+background:#fff;
+border:1px solid #d6d6d6}
+
+.cap-head{
+flex:none;
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:var(--sp2);
+background:var(--g-blue);
+color:#fff;
+line-height:1.3}
+
+.cap-head p{
+font-size:var(--fs-xs)}
+
+.cap-head h2{
+font-size:var(--fs-lg);
+font-weight:600;
+margin:4px 0}
+
+.cap-grid{
+flex:1;
+min-height:0;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+grid-template-rows:repeat(3,1fr);
+gap:6px;
+aspect-ratio:1/1;
+max-width:100%;
+align-self:center;
+width:100%}
+
+.cap-tile{
+position:relative;
+padding:0;
+overflow:hidden;
+background:#fff;
+cursor:pointer}
+
+.cap-tile img{
+display:block;
+width:100%;
+height:100%;
+object-fit:cover;
+transition:transform .2s ease}
+
+/* 선택된 칸: 사진이 안쪽으로 줄어들고 왼쪽 위에 파란 체크 표시 */
+.cap-tile[aria-pressed="true"] img{
+transform:scale(.8)}
+
+.cap-tile::after{
+content:"";
+position:absolute;
+left:4px;
+top:4px;
+width:18px;
+height:18px;
+border-radius:50%;
+background:var(--g-blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
+opacity:0;
+transform:scale(.5);
+transition:opacity .15s ease,transform .15s ease}
+
+.cap-tile[aria-pressed="true"]::after{
+opacity:1;
+transform:none}
+
+.cap-tile:focus-visible{
+outline:3px solid var(--g-blue);
+outline-offset:2px}
+
+.cap-foot{
+flex:none;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:var(--sp1);
+padding-top:6px;
+border-top:1px solid #e5e5e5}
+
+.cap-icons{
+display:flex;
+gap:var(--sp1);
+color:#5f6368}
+
+.cap-icons svg{
+display:block;
+width:20px;
+height:20px}
+
+.cap-btn{
+min-width:80px;
+min-height:44px;
+padding:0 var(--sp2);
+background:var(--g-blue);
+color:#fff;
+font-size:var(--fs-xs);
+font-weight:600;
+letter-spacing:.04em;
+border-radius:2px}
+
+.cap-btn:hover{
+filter:brightness(.95)}
+
+.cap-btn:focus-visible{
+outline:3px solid #1a1a1a;
+outline-offset:2px}
+
+@media (max-width:600px){
+  .cap-card{
+  height:auto;
+  max-height:100%}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+  animation:none!important;
+  transition:none!important}
+
+  .reveal,.name,.kw-sentence .tok{
+  opacity:1!important;
+  transform:none!important;
+  filter:none!important}
+}
