@@ -822,13 +822,6 @@ font-size:var(--fs-lg);
 font-weight:500;
 line-height:1.3}
 
-.m-video .m-arrow{
-font-size:var(--fs-lg);
-transition:transform .3s ease}
-
-.m-video:hover .m-arrow{
-transform:translateX(var(--sp1))}
-
 .m-photo{
 grid-column:span 3;
 justify-content:space-between;

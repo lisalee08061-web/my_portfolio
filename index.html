@@ -151,11 +151,12 @@
     <div class="shell">
       <h2 class="sec-title">MEDIA</h2>
       <div class="media-board">
-        <!-- 영상 카드: 미리보기는 소리 없이 반복 재생, 누르면 원본 영상이 새 탭에서 열림 -->
-        <a class="m-card m-video has-video" href="Resources/2027%20NCT%20WISH%20SEASON%E2%80%99S%20GREETINGS%20BEHIND.mp4" target="_blank" rel="noopener" aria-label="2027 NCT WISH SEASON’S GREETINGS BEHIND 영상 보기 (새 탭)">
-          <video id="mediaVideo" src="Resources/2027%20NCT%20WISH%20SEASON%E2%80%99S%20GREETINGS%20BEHIND.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
-          <span class="m-foot"><span class="m-title">2027 SEASON’S GREETINGS<br>BEHIND</span><span class="m-arrow" aria-hidden="true">→</span></span>
-        </a>
+        <!-- 영상 카드: 미리보기만 보여줌 (원본 앞 30초, 소리 없음, 1.7MB 반복 재생) — 누르는 기능 없음
+             원본(169MB)은 GitHub 용량 제한 때문에 올리지 않음 -->
+        <div class="m-card m-video has-video">
+          <video id="mediaVideo" src="Resources/media_seasons_greetings_preview.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+          <span class="m-foot"><span class="m-title">2027 SEASON’S GREETINGS<br>BEHIND</span></span>
+        </div>
         <!-- 화보집 4개: href를 실제 화보 주소로 바꿔주세요 -->
         <a class="m-card m-photo has-photo" href="#"><img src="Resources/media_%EB%8D%B0%EC%9D%B4%EC%A6%88%EB%93%9C%20%EC%BD%94%EB%A6%AC%EC%95%84%208%EC%9B%94%ED%98%B8.jpg" alt="" style="object-position:50% 40%"><span class="m-title">데이즈드 코리아<br>8월호</span><span class="m-dot" aria-hidden="true"></span></a>
         <a class="m-card m-photo has-photo" href="#"><img src="Resources/media_%EC%BD%94%EC%8A%A4%EB%AA%A8%20%ED%8F%B4%EB%A6%AC%ED%83%84%206%EC%9B%94%ED%98%B8.avif" alt="" style="object-position:50% 45%"><span class="m-title">코스모폴리탄<br>6월호</span><span class="m-dot" aria-hidden="true"></span></a>
