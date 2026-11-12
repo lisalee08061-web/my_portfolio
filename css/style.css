@@ -1,17 +1,18 @@
 /* design-style.md 기준
-   색: 글자 --ink #141414 · 보조 글자 --ink-soft #5b5b5b · 구분선 --line #e5e5e5 · 연한 면 --paper2 #f0f0f0 · 페이지 배경 흰색
-       포인트 배경 --pale #E6EEF5 (멤버 · 어워즈 · 푸터 섹션, 태그 칩) · 악센트 --point 네이비 #2F4156(버튼·링크) / --accent 틸 #2A6F72(라벨) / 선택된 멤버 이름은 #6888A5
+   색 (팔레트: 옐로우 Morning Mist #F7F9E1 + 블루 Glacial Sky #A9E0F1 · Teal Waters #204654 — 그린 없음)
+       페이지 배경 --bg 모닝 미스트 #F7F9E1 · 글자 --ink #141414 · 보조 글자 --ink-soft #5b5b5b · 구분선 --line #E1E4C8 · 연한 면 --paper2 #EDF0D2
+       포인트 배경 --pale 글래셜 스카이 #A9E0F1 (헤더, 푸터, 태그 칩, 앨범 커버 CLICK 덮개) · 악센트 --point / --accent 틸 워터스 #204654 (버튼·링크·라벨)
    글꼴: Pretendard, 제목 600(세미볼드, 최대 굵기) / 본문 400 · 글자 크기: 본문 16px, 1.25배 단계 · 줄 간격 1.6
    모서리 6px · 간격 10단위(그리드 12칸, gap 24px만 예외) · 컨텐츠 폭 1440px · 그림자 없이 테두리로 구분 */
 :root{
-  --bg:#fff;
-  --pale:#E6EEF5;
+  --bg:#F7F9E1;
+  --pale:#A9E0F1;
   --ink:#141414;
   --ink-soft:#5b5b5b;
-  --line:#e5e5e5;
-  --paper2:#f0f0f0;
-  --point:#2F4156;
-  --accent:#2A6F72;
+  --line:#E1E4C8;
+  --paper2:#EDF0D2;
+  --point:#204654;
+  --accent:#204654;
   --fs-xs:12.8px;
   --fs-sm:14px;  /* 푸터 글자 최소 크기 */
   --fs-base:16px;
@@ -74,6 +75,23 @@ cursor:pointer}
 h1,h2,h3{
 font-weight:600}
 
+/* 강조 제목 글꼴: Bright Sunlist (Resources/bright_sunlist) — 섹션 제목 · NCT WISH 제목 · 멤버 이름 · 앨범 이름
+   데모 버전이라 숫자(0~9)는 워터마크 로고로 나옴 → 숫자가 들어가는 글자에는 쓰지 않기 / 한글은 글꼴에 없어서 Pretendard로 보임 */
+@font-face{
+font-family:'Bright Sunlist';
+src:url("../Resources/bright_sunlist/Bright Sunlist DEMO VERSION.otf") format("opentype");
+font-weight:400;
+font-style:normal;
+font-display:swap}
+
+.sec-title,
+.kw-title,
+.mem-info h3,
+.disco-name{
+font-family:'Bright Sunlist','Pretendard',sans-serif;
+font-weight:400;  /* 글꼴 자체가 굵어서 더 굵게 만들지 않음 */
+letter-spacing:.06em}  /* 글꼴 자체 자간이 좁아서 살짝 넓힘 */
+
 a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
 outline:2px solid var(--point);
 outline-offset:2px}
@@ -98,14 +116,12 @@ padding:0 5%}
 padding:var(--sp7) 0}
 
 .sec-title{
-font-size:var(--fs-xl);
-letter-spacing:-.01em}
+font-size:var(--fs-xl)}
 
 /* 사진·영상 자리표시 */
 .ph{
 position:relative;
 background:var(--paper2);
-border-radius:var(--radius);
 overflow:hidden;
 display:flex;
 align-items:center;
@@ -132,8 +148,8 @@ transform:none}
 position:sticky;
 top:0;
 z-index:50;
-background:var(--bg);
-border-bottom:1px solid var(--line)}
+background:var(--pale);
+border-bottom:1px solid rgba(32,70,84,.12)}
 
 .site-header .shell{
 display:flex;
@@ -180,10 +196,11 @@ letter-spacing:.06em}
 .gnb a:hover{
 color:var(--point)}
 
-/* ---------- HERO : 폭 전체, 가로:세로 2:1, 가운데 큰 제목 / 스크롤하면 사라짐 ---------- */
+/* ---------- HERO : 폭 전체 / 스크롤하면 사라짐
+   화면 높이에서 아래쪽 160px만 남김 → 처음 화면에 다음 섹션의 NCT WISH 제목·소개만 보이고 사진은 안 보임 (어느 화면 높이에서나 똑같이) ---------- */
 .hero{
 position:relative;
-height:50vw;
+height:calc(100vh - var(--header) - 160px);
 min-height:320px;
 overflow:hidden}
 
@@ -191,59 +208,90 @@ overflow:hidden}
 position:relative;
 height:100%;
 overflow:hidden;
-will-change:opacity,transform}
+will-change:opacity}
 
-.hero-video{
+/* 배경: 하늘·언덕 사진 */
+.hero-stage{
+background:var(--pale) url("../Resources/hero section_bg.jpg") center/cover no-repeat}
+
+/* 캐릭터: 화면 가운데, 좌우로 끌면 돎 (터치에서는 위아래로 밀면 페이지 스크롤) */
+.hero-char{
+position:absolute;
+left:50%;
+top:50%;
+width:min(44vw,560px);
+aspect-ratio:624/423;
+transform:translate(-50%,-55%);
+perspective:1200px;
+cursor:grab;
+touch-action:pan-y;
+user-select:none;
+-webkit-user-select:none}
+
+.hero-char.dragging{
+cursor:grabbing}
+
+.hero-char:focus-visible{
+outline:2px solid #fff;
+outline-offset:8px}
+
+/* 제자리에서 위아래로 둥둥 */
+.hero-float{
+position:absolute;
+inset:0;
+animation:heroFloat 3.2s ease-in-out infinite}
+
+@keyframes heroFloat{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-5%)}}
+
+.hero-turn{
+position:absolute;
+inset:0;
+transform-style:preserve-3d}
+
+/* 사진 4장은 같은 자리에 겹쳐 두고, JS가 각도에 따라 투명도·기울기를 바꿈 */
+.hero-view{
 position:absolute;
 inset:0;
 width:100%;
 height:100%;
-object-fit:cover;
-background:var(--paper2)}
+object-fit:contain;
+opacity:0;
+pointer-events:none;
+-webkit-user-drag:none}
 
-.hero-stage::after{
-content:"";
+/* 바닥 그림자: 캐릭터가 위로 뜰 때 작고 옅어짐 */
+.hero-shadow{
 position:absolute;
-inset:0;
-background:rgba(20,20,20,.35);
-pointer-events:none}
+left:32%;
+right:32%;
+bottom:-4%;
+height:7%;
+border-radius:50%;
+background:radial-gradient(closest-side,rgba(30,60,30,.35),rgba(30,60,30,0));
+animation:heroShadow 3.2s ease-in-out infinite}
 
-.hero-toggle{
-color:#fff}
+@keyframes heroShadow{
+0%,100%{transform:scale(1);opacity:1}
+50%{transform:scale(.8);opacity:.6}}
 
-/* 히어로 로고: 영상 정가운데 NCT WISH 로고 이미지 (흰색 투명 PNG)
-   영상 묶음(.hero-stage) 밖에 두어서 스크롤할 때 영상만 흐려지고 로고는 그대로 */
-/* 로고: 영상을 가리지 않게 작게, 영상 아래쪽 가운데에 */
-.hero-title{
+/* 안내 문구: 처음 한 번 돌리면 사라짐 */
+.hero-hint{
 position:absolute;
 left:0;
 right:0;
-bottom:var(--sp4);
-z-index:2;
-margin:0;
-display:flex;
-justify-content:center;
-padding:0 5%;
-pointer-events:none}
-
-.hero-title img{
-display:block;
-width:min(14vw,220px);
-height:auto}
-
-/* 멈춤/재생 버튼은 왼쪽 위 (아래쪽은 큰 제목 자리) */
-.hero-toggle{
-position:absolute;
-left:5%;
-top:var(--sp2);
-z-index:2;
-min-width:44px;
-min-height:44px;
+bottom:var(--sp3);
+text-align:center;
 font-size:var(--fs-xs);
-letter-spacing:.2em}
+letter-spacing:.2em;
+color:#fff;
+text-shadow:0 1px 6px rgba(0,0,0,.35);
+pointer-events:none;
+transition:opacity .5s ease}
 
-.hero-toggle:hover{
-text-decoration:underline}
+.hero-hint.hide{
+opacity:0}
 
 /* ---------- ABOUT : 타이포그래피 한 문장, 키워드마다 왼쪽에 사진 ----------
    스케치: 2줄 왼쪽 정렬 / 레퍼런스: 사진이 글자 줄 안에 섞여 세로 가운데 정렬, 사진 크기는 제각각
@@ -251,56 +299,60 @@ text-decoration:underline}
 /* 여백을 넉넉히: 섹션을 화면 높이의 80% 이상으로 두고 문장을 가운데에 */
 #about{
 min-height:100vh;
-padding:160px 0}  /* 여백을 넉넉히: 위아래 160px, 최소 화면 높이만큼 */
-
-/* 페일 블루 섹션: 멤버 · 어워즈 · 푸터 (헤더 · 키워드 · 디스코그래피 · 미디어 · 공지는 흰 바탕) */
-#awards{
-background:var(--pale)}
-
-.members{
-background:var(--pale)}  /* 멤버 섹션 바탕 = 페일 블루 #E6EEF5, 그 위에 배경 사진이 깔림 */
+padding:var(--sp5) 0 160px}  /* 위는 60px만 (히어로 바로 아래에서 제목이 보이게), 아래는 넉넉히 160px */
 
 #about .shell{
 width:100%}
 
-/* 문장: 왼쪽 위에 왼쪽 정렬, Pretendard Medium, 자간 좁게 */
-.kw-sentence{
---kw-fs:clamp(26px,calc(2.4vw + 2.4px),36px);
-font-size:var(--kw-fs);
-font-weight:500;
-letter-spacing:-.04em;
+/* 위쪽 줄: 왼쪽에 큰 제목, 오른쪽 끝에 소개 문장 (sketch/keyword_section_new Sketch.png) */
+.kw-head{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+gap:var(--sp4)}
+
+.kw-title{
+font-size:var(--fs-xl);
 line-height:1.2}
 
+/* 소개 문장: 오른쪽 정렬, 본문보다 한 단계 크게 (20px) */
 .kw-line{
-display:flex;
-flex-wrap:wrap;
-justify-content:flex-start;
-align-items:baseline;
-gap:.2em .3em}
+max-width:520px;
+font-size:var(--fs-md);
+line-height:1.6;
+text-align:right}
 
-.kw-line + .kw-line{
-margin-top:.1em}
-
-/* strong 기본 굵기(bold) 대신 문장 굵기(500) 그대로 */
+/* strong 기본 굵기(bold) 대신 본문 굵기 그대로 */
 .kw-line strong{
-font-weight:inherit}
+font-weight:400}
 
-/* 문장 아래: 같은 크기 사진 5장을 한 줄로, 사진 위 왼쪽에 작은 키워드 라벨 (그리드 gap 24px) */
+/* 사진 5장: 4칸 그리드에 계단 배치 — 윗줄 1·3·4칸, 아랫줄 1·2칸 (빈 칸은 여백) */
 .kw-gallery{
 display:grid;
-grid-template-columns:repeat(5,minmax(0,1fr));
+grid-template-columns:repeat(4,minmax(0,1fr));
 gap:24px;
-margin-top:var(--sp8);
+margin-top:var(--sp6);
 list-style:none}
 
-.kw-gallery .kw-label{
-display:block;
-white-space:nowrap;
-margin-bottom:var(--sp1);
-font-size:var(--fs-xs);
-letter-spacing:.08em;
-line-height:1.6;
-color:var(--ink-soft)}
+.kw-gallery li:nth-child(1){
+grid-column:1;
+grid-row:1}
+
+.kw-gallery li:nth-child(2){
+grid-column:3;
+grid-row:1}
+
+.kw-gallery li:nth-child(3){
+grid-column:4;
+grid-row:1}
+
+.kw-gallery li:nth-child(4){
+grid-column:1;
+grid-row:2}
+
+.kw-gallery li:nth-child(5){
+grid-column:2;
+grid-row:2}
 
 .kw-gallery .kw-frame{
 overflow:hidden}
@@ -308,12 +360,8 @@ overflow:hidden}
 .kw-gallery img{
 display:block;
 width:100%;
-aspect-ratio:4/5;
-object-fit:cover;
-transition:transform .5s ease}
-
-.kw-gallery li:hover img{
-transform:scale(1.05)}
+aspect-ratio:9/8;
+object-fit:cover}
 
 /* 섹션에 도달하면 단어와 사진이 왼쪽부터 차례로 떠오름 (--i = 순서) */
 .kw-sentence .tok{
@@ -334,197 +382,271 @@ filter:blur(calc(var(--tp) * 6px))}
 .kw-sentence.settled .tok{
 transition:none}
 
+/* 사진 등장: 사진 줄이 화면에 들어오면(JS가 .show) 꿈 → 드림 → 판타지 → 상상 → 스토리 순서로 하나씩 페이드인
+   --a = 나타나는 순서 0~4 (자리는 흩어져 있어서 무작위로 켜지는 느낌) */
+.kw-sentence .kw-gallery li.tok{
+opacity:0;
+transform:none;
+filter:none;
+transition:opacity 1s ease;
+transition-delay:calc(.2s + var(--a) * .35s)}
+
+/* 등장이 끝난 뒤에는 스크롤 페이드아웃에 바로 반응하도록 지연 효과를 끔 */
+.kw-sentence .kw-gallery.settled li.tok{
+transition:none}
+
 /* 다음 섹션으로 스크롤할 때: 사진들이 왼쪽부터 하나씩 페이드아웃
    --gout = 사진 줄이 위로 지나간 정도 0~1 (JS) / --k = 사진 순서 0~4 → 순서대로 조금씩 늦게 사라짐 */
-.kw-sentence.in .kw-gallery li.tok{
+.kw-sentence.in .kw-gallery.show li.tok{
 --tp:clamp(0, calc(var(--gout, 0) * 2 - var(--k) * .25), 1);
 opacity:calc(1 - var(--tp));
 transform:translateY(calc(var(--tp) * -20px));
 filter:none}
 
-/* ---------- MEMBERS : 화면에 고정된 채 스크롤하면 오른쪽 사진이 다음 멤버로 바뀌고, 왼쪽 이름 색이 바뀜 ---------- */
+/* ---------- MEMBERS : 왼쪽 큰 사진 + 왼쪽 아래 코너에 이름·정보 / 오른쪽 세로 슬라이더
+   섹션을 지나는 동안 화면(무대)은 헤더 아래에 고정, 스크롤하면 오른쪽 사진 줄이 위로 올라가고 가운데 온 멤버가 왼쪽에 크게 보임 ---------- */
+/* 섹션 높이는 JS가 (무대 높이 + 슬라이더가 움직일 거리)로 정함 */
 .members{
-position:relative;
-padding:0;
-height:460vh}
+padding:0}
 
-.members-sticky{
+.mem-stage{
 position:sticky;
 top:var(--header);
 height:calc(100vh - var(--header));
-overflow:hidden;
+overflow:hidden}
+
+.mem-split{
+height:100%;
+padding-top:var(--sp4);
+padding-bottom:var(--sp4);
 display:grid;
-grid-template-columns:minmax(0,1fr) 43vw;
-padding-left:calc(max(0px,(100% - var(--content)) / 2) + 5%)}
+grid-template-columns:repeat(2,minmax(0,1fr))}
 
-.members-names{
+/* 왼쪽: 멤버 사진을 겹쳐 두고 선택된 사진만 보임 */
+.mem-main{
 position:relative;
-z-index:1;
-display:flex;
-align-items:center;
-padding:var(--sp5) var(--sp4) var(--sp5) 0}
-
-/* 이름 쪽(왼쪽) 배경: 페일 블루 바탕 위에 nctwish_bg1 사진을 30% 불투명도로 은은하게 (오른쪽 사진 칸 43vw는 제외) */
-.members-sticky::before{
-content:"";
-position:absolute;
-top:0;
-bottom:0;
-left:0;
-right:43vw;
-background:url("../Resources/nctwish_bg1.jpg") 50% 10%/cover no-repeat;
-opacity:.3;
-pointer-events:none}
-
-/* 사진 위에 페일 블루 레이어를 따로 덮어 이름이 더 눈에 띄게 (페일 블루 #E6EEF5, 80%) */
-.members-sticky::after{
-content:"";
-position:absolute;
-top:0;
-bottom:0;
-left:0;
-right:43vw;
-background:rgba(230,238,245,.8);
-pointer-events:none}
-
-.names{
-list-style:none;
-display:flex;
-flex-wrap:wrap;
-gap:0 var(--sp3)}
-
-.name{
-font-size:clamp(var(--fs-xl),3.6vw,var(--fs-3xl));
-font-weight:600;
-letter-spacing:-.02em;
-opacity:0;
-transform:translateY(30px);
-transition:opacity .7s ease,transform .7s ease,color .3s}
-
-.members-sticky.in .name{
-opacity:1;
-transform:none}
-
-.members-sticky.in .name:nth-child(1){
-transition-delay:.3s,.3s,0s}
-
-.members-sticky.in .name:nth-child(2){
-transition-delay:.42s,.42s,0s}
-
-.members-sticky.in .name:nth-child(3){
-transition-delay:.54s,.54s,0s}
-
-.members-sticky.in .name:nth-child(4){
-transition-delay:.66s,.66s,0s}
-
-.members-sticky.in .name:nth-child(5){
-transition-delay:.78s,.78s,0s}
-
-.members-sticky.in .name:nth-child(6){
-transition-delay:.9s,.9s,0s}
-
-.name.on{
-color:#6888A5}  /* 선택된 멤버: 회색빛 도는 스카이 블루 (페일 블루 배경 위 대비 3:1 이상) */
-
-.member-panel{
-position:relative;
-height:100%}
-
-.member-slide{
-position:absolute;
-inset:0;
 overflow:hidden;
-opacity:0;
-transition:opacity .5s ease}  /* 확대한 사진이 칸 밖으로 넘치지 않게 */
+background:var(--paper2)}
 
-.member-slide.on{
-opacity:1}
-
-.member-slide img{
+.mem-photo{
 position:absolute;
 inset:0;
 width:100%;
 height:100%;
-object-fit:cover}
+object-fit:cover;
+opacity:0;
+transition:opacity .5s ease}
+
+.mem-photo.on{
+opacity:1}
 
 /* 밝은 사진 위에서도 이름·정보가 읽히도록 아래쪽만 어둡게 */
-.member-slide::after{
+.mem-main::after{
 content:"";
 position:absolute;
 left:0;
 right:0;
 bottom:0;
 height:45%;
-background:linear-gradient(to top,rgba(20,20,20,.6),rgba(20,20,20,0))}
+background:linear-gradient(to top,rgba(20,20,20,.6),rgba(20,20,20,0));
+pointer-events:none}
 
-.member-slide .info{
+/* 이름·국적·생일: 왼쪽 아래 코너 */
+.mem-info{
 position:absolute;
 left:0;
 bottom:0;
-z-index:1;
+z-index:2;
 padding:var(--sp4);
-color:#fff}
+color:#fff;
+transition:opacity .3s ease}
 
-.member-slide h3{
+.mem-info.swap{
+opacity:0}
+
+.mem-info h3{
 font-size:var(--fs-xl);
-letter-spacing:-.01em}
+line-height:1.2;
+margin-bottom:var(--sp1)}
 
-.member-slide p{
-font-size:var(--fs-md)}
+.mem-info p{
+font-size:var(--fs-md);
+line-height:1.5}
 
-/* ---------- ALBUMS : 제목 / 커버 · 정보 · (빈 칸) · 썸네일 열 ---------- */
-.album-grid{
+/* 오른쪽: 사진이 세로로 한 줄 — JS가 줄을 위아래로 옮겨 선택된 사진을 가운데에 */
+.mem-rail{
+position:relative;
+overflow:hidden}
+
+.mem-track{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:var(--sp3);
+list-style:none;
+will-change:transform}
+
+.mem-track li{
+width:24%}
+
+.mem-thumb{
+display:block;
+width:100%;
+opacity:.45;
+transition:opacity .3s ease,transform .3s ease}
+
+.mem-thumb img{
+display:block;
+width:100%;
+aspect-ratio:4/5;
+object-fit:cover}
+
+.mem-thumb:hover{
+opacity:.8}
+
+/* 가운데(선택된) 사진: 진하게, 조금 크게 */
+.mem-thumb.on{
+opacity:1;
+transform:scale(1.25)}
+
+/* ---------- ALBUMS : 살짝 돌린 앨범 커버 4열 지그재그 / 커버를 누르면 커버들이 왼쪽으로 밀리고 오른쪽에 설명 영역이 열림 ---------- */
+/* 두 칸: 커버 판 | 설명 영역 — 처음엔 설명 칸 폭 0, 열리면 380px (폭이 바뀌는 동안 커버들이 부드럽게 왼쪽으로 밀림) */
+.disco{
 display:grid;
-grid-template-columns:repeat(12,1fr);
-gap:var(--sp4) 24px;
-align-items:start}
+grid-template-columns:minmax(0,1fr) 0px;
+align-items:start;  /* 설명이 길어져도 커버 줄 간격이 늘어나지 않게 */
+margin-top:var(--sp5);
+transition:grid-template-columns .5s ease}
 
-.album-head{
-grid-column:1/span 10;
-grid-row:1;
-align-self:center}
+.disco.open{
+grid-template-columns:minmax(0,1fr) 380px}
 
-.album-cover{
-grid-column:1/span 4;
-grid-row:2}
+.disco-grid{
+position:relative;  /* 커버 위치(offsetLeft/Top)를 이 판 기준으로 재기 위해 */
+display:grid;
+grid-template-columns:repeat(4,minmax(0,1fr));
+gap:var(--sp6) var(--sp7);
+padding:var(--sp3) 0;  /* 좌우 여백 없이 다른 섹션처럼 컨텐츠 폭 양 끝에 맞춤 */
+list-style:none;
+transition:gap .5s ease,padding .5s ease}
 
-.album-cover .cover-img{
+/* 설명이 열려 판이 좁아지면 간격을 줄여서 커버 크기는 거의 그대로 (오른쪽 끝은 설명 영역과 띄움) */
+.disco.open .disco-grid{
+gap:var(--sp5) var(--sp4);
+padding:var(--sp3) var(--sp4) var(--sp3) 0}
+
+/* 커버: 4열 그리드 칸에 똑바로, 같은 줄은 위아래 높이를 맞춤 */
+.disco-grid li{
+align-self:start;
+transition:transform .35s ease}
+
+/* 처음 도달 전: 모든 커버가 첫 번째 커버 자리(왼쪽 위)에 카드 더미처럼 겹쳐 있음
+   --sx/--sy = 제자리에서 첫 번째 커버 자리까지 거리 + 몇 px씩 어긋남, --pr = 더미 안에서 각자 기울기 (JS가 계산) / 첫 앨범이 맨 위 */
+.disco-grid.stacked li{
+z-index:calc(20 - var(--k));
+transform:translate(var(--sx),var(--sy)) rotate(var(--pr));
+transition:none}
+
+/* 퍼질 때: 맨 위 커버부터 하나씩 조금씩 늦게 제자리로 (--k = 순서) */
+.disco-grid.spreading li{
+z-index:calc(20 - var(--k));
+transition:transform 1s cubic-bezier(.2,.8,.2,1);
+transition-delay:calc(var(--k) * 90ms)}
+
+/* 마우스를 올리거나 선택하면 살짝 커짐 */
+.disco-grid li:hover,
+.disco-grid li:has(.on){
+transform:scale(1.04)}
+
+.disco-cover{
+position:relative;
+display:block;
+width:100%;
+transition:opacity .3s ease}
+
+/* 마우스를 올리면(키보드로 고르면) 커버 위에 흰 막 + CLICK 글자 → 누르면 무언가 열린다는 걸 알 수 있게 */
+.disco-cover::after{
+content:"CLICK";
+position:absolute;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(169,224,241,.85);  /* 글래셜 스카이 #A9E0F1 */
+font-size:var(--fs-sm);
+font-weight:600;
+letter-spacing:.2em;
+color:var(--ink);
+opacity:0;
+transition:opacity .25s ease}
+
+.disco-cover:hover::after,
+.disco-cover:focus-visible::after{
+opacity:1}
+
+/* 이미 열려 있는 앨범은 다시 누르면 닫히므로 CLOSE */
+.disco-cover.on::after{
+content:"CLOSE"}
+
+.disco-cover img{
 display:block;
 width:100%;
 aspect-ratio:1/1;
 object-fit:cover;
-border-radius:var(--radius);
 background:var(--paper2)}
 
-.album-thumb img{
-display:block;
-width:100%;
-aspect-ratio:1/1;
-object-fit:cover;
-border-radius:var(--radius);
-transition:transform .3s}
+/* 설명이 열려 있을 때: 선택 안 된 커버는 흐리게 */
+.disco.open .disco-cover:not(.on){
+opacity:.45}
 
-.album-info{
-grid-column:5/span 4;
-grid-row:2;
-padding-left:var(--sp3)}
+.disco.open .disco-cover:not(.on):hover{
+opacity:1}
+
+/* 설명 영역: 칸이 좁을 때는 잘려서 안 보임, 안쪽 내용은 폭 고정이라 열릴 때 오른쪽에서 밀려 들어오는 느낌 */
+.disco-panel{
+overflow:hidden;
+border-left:1px solid var(--line)}
+
+.disco-inner{
+position:relative;
+width:380px;
+padding:var(--sp3) 0 var(--sp3) var(--sp4)}
+
+.disco-close{
+position:absolute;
+top:var(--sp2);
+right:0;
+width:44px;
+height:44px;
+font-size:var(--fs-lg);
+line-height:1;
+color:var(--ink-soft)}
+
+.disco-close:hover{
+color:var(--point)}
 
 .album-type{
+display:block;
+padding-right:44px;
 font-size:var(--fs-xs);
 letter-spacing:.08em;
 color:var(--accent)}
 
-.album-info h3{
+.disco-name{
 font-size:var(--fs-2xl);
-letter-spacing:-.01em;
-margin-bottom:var(--sp1)}
+line-height:1.2;
+margin:var(--sp1) 0 var(--sp2)}
 
-.album-info .intro{
+.disco-name:focus{
+outline:none}
+
+.disco-inner .intro{
 color:var(--ink-soft);
 margin-bottom:var(--sp2)}
 
 .tracks{
-list-style:none}
+list-style:none;
+border-top:1px solid var(--line)}
 
 .tracks li{
 display:flex;
@@ -534,12 +656,9 @@ border-bottom:1px solid var(--line)}
 
 .tracks li span{
 width:24px;
+flex:none;
 color:var(--ink-soft);
 font-variant-numeric:tabular-nums}
-
-/* 트랙은 4곡까지만 보여주고, 전체 정보는 MORE 링크로 앨범 정보 페이지에서 */
-.tracks li:nth-child(n+5){
-display:none}
 
 .more-btn{
 display:flex;
@@ -547,7 +666,7 @@ align-items:center;
 justify-content:center;
 width:100%;
 min-height:44px;
-margin-top:var(--sp1);
+margin-top:var(--sp2);
 font-size:var(--fs-xs);
 letter-spacing:.12em;
 text-align:center;
@@ -555,63 +674,6 @@ color:var(--point)}
 
 .more-btn:hover{
 text-decoration:underline}
-
-.album-up{
-grid-column:11/span 2;
-grid-row:1;
-justify-self:center}
-
-.album-list{
-grid-column:11/span 2;
-grid-row:2;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:var(--sp1)}
-
-/* 썸네일 3개만 보이는 높이 = 썸네일 3개 + 사이 간격 2개 */
-.album-view{
---thumb:clamp(80px,8vw,120px);
-width:var(--thumb);
-height:calc(var(--thumb) * 3 + var(--sp2) * 2);
-overflow:hidden}
-
-.album-track{
-display:flex;
-flex-direction:column;
-gap:var(--sp2);
-transition:transform .45s ease}
-
-.album-arrow{
-width:44px;
-height:44px;
-border-radius:var(--radius);
-border:1px solid var(--line);
-display:flex;
-align-items:center;
-justify-content:center;
-color:var(--point);
-transition:background .2s,color .2s,border-color .2s}
-
-.album-arrow:hover:not(:disabled){
-background:var(--point);
-color:#fff;
-border-color:var(--point)}
-
-.album-arrow:disabled{
-opacity:.3;
-cursor:default}
-
-.album-thumb{
-display:block;
-width:100%}
-
-.album-thumb:hover img,.album-thumb:focus-visible img{
-transform:scale(.96)}
-
-.album-thumb.on img{
-outline:2px solid var(--point);
-outline-offset:-2px}
 
 /* ---------- AWARDS : 가로 자동 스크롤 ---------- */
 .awards-rail{
@@ -643,18 +705,13 @@ text-align:center}  /* 연도 · 상 이름 · 설명 가운데 정렬 */
 height:120px;
 display:flex;
 align-items:center;
-justify-content:center;  /* 로고를 칸 가운데에 */
-background:var(--pale)}  /* 섹션과 같은 페일 블루라 칸은 안 보임. 흰 배경이 든 로고(blend)가 이 색에 섞이려면 바로 뒤에 색이 깔려 있어야 함 */
+justify-content:center}  /* 로고를 칸 가운데에 */
 
 .award-logo img{
 display:block;
 width:auto;
 max-width:100%;
 object-fit:contain}
-
-/* 흰 배경이 들어 있는 로고(서울가요대상, AAA)는 페이지 배경색에 섞이게 */
-.award-logo img.blend{
-mix-blend-mode:multiply}
 
 .award .yr{
 font-size:var(--fs-xs);
@@ -680,7 +737,6 @@ margin-top:var(--sp4)}
 position:relative;
 display:flex;
 flex-direction:column;
-border-radius:var(--radius);
 overflow:hidden}
 
 .m-card::before{
@@ -693,6 +749,36 @@ justify-content:center;
 font-size:var(--fs-xs);
 letter-spacing:.1em;
 opacity:.5}
+
+/* 섹션을 지나는 동안 화면(무대)은 헤더 아래에 고정 — 섹션 높이는 JS가 (무대 높이 + 줄어드는 데 쓸 스크롤 거리)로 정함 */
+#media{
+padding:0}
+
+.media-stage{
+position:sticky;
+top:var(--header);
+height:calc(100vh - var(--header));
+display:flex;
+flex-direction:column;
+justify-content:center}
+
+.media-stage .shell{
+width:100%}
+
+/* 화면이 낮아 내용이 무대에 다 안 들어가면 고정 없이 보통 스크롤 */
+.media-stage.no-pin{
+position:static;
+height:auto;
+padding:var(--sp7) 0}
+
+/* 줌 효과 중: 영상 카드 폭은 JS가 (보드 전체 폭 → 원래 6칸 폭)으로 바꿈, 화보 카드 위를 덮었다가 줄어들면서 드러냄
+   --mp = 화보 카드가 나타나는 정도 0~1 */
+.media-board.zoom .m-video{
+justify-self:start;
+z-index:2}
+
+.media-board.zoom .m-photo{
+opacity:var(--mp, 1)}
 
 .m-video{
 grid-column:1/span 6;
@@ -818,7 +904,7 @@ text-decoration:underline}
 flex:none;
 font-size:var(--fs-xs);
 color:var(--accent);
-background:var(--pale);  /* 공지 태그: 페일 블루 칩 + 틸 글자 */
+background:var(--pale);  /* 공지 태그: 글래셜 스카이 칩 + 틸 워터스 글자 */
 border:1px solid var(--pale);
 border-radius:var(--radius);
 padding:0 var(--sp1)}
@@ -925,56 +1011,75 @@ height:22px}
 height:44px}
 
 @media (max-width:960px){
+  /* 좁은 화면: 히어로는 원래대로 가로:세로 2:1 */
+  .hero{
+  height:50vw}
+
+  /* 좁은 화면: 미디어 줌 효과 없이 보통 스크롤 */
+  #media{
+  padding:var(--sp7) 0}
+
+  .media-stage{
+  position:static;
+  height:auto}
+
   .gnb{
   gap:0 var(--sp2)}
 
-  .members-sticky{
-  grid-template-columns:1fr;
-  grid-template-rows:auto minmax(0,1fr);
-  padding-left:0}
+  /* 좁은 화면: 고정 무대 없이 큰 사진 아래에 가로 슬라이더 (누르면 바뀜) */
+  .members{
+  padding:var(--sp7) 0}
 
-  .members-names{
-  padding:var(--sp2) 5%}
-
-  .members-sticky::before,.members-sticky::after{
-  right:0}
-
-  .name{
-  font-size:var(--fs-lg)}
-
-  .member-slide h3{
-  font-size:var(--fs-lg)}
-
-  .member-slide p{
-  font-size:var(--fs-base)}
-
-  .album-head,.album-info,.album-list{
-  grid-column:1/-1;
-  grid-row:auto}
-
-  .album-info{
-  padding-left:0}
-
-  .album-cover{
-  grid-column:1/-1;
-  grid-row:auto;
-  max-width:360px}
-
-  .album-view{
-  width:100%;
+  .mem-stage{
+  position:static;
   height:auto;
+  overflow:visible}
+
+  .mem-split{
+  display:block;
+  padding-top:0;
+  padding-bottom:0}
+
+  .mem-main{
+  aspect-ratio:4/5}
+
+  .mem-info{
+  padding:var(--sp3)}
+
+  .mem-rail{
+  margin-top:var(--sp2);
   overflow-x:auto}
 
-  .album-track{
+  .mem-track{
   flex-direction:row;
+  gap:var(--sp2);
+  padding:var(--sp2);
   transform:none!important}
 
-  .album-arrow{
-  display:none}
-
-  .album-thumb{
-  width:120px;
+  .mem-track li{
+  width:28%;
   flex-shrink:0}
+
+  .mem-thumb.on{
+  transform:none}
+
+  /* 좁은 화면: 커버 2열, 설명은 옆이 아니라 커버들 아래에 열림 */
+  .disco,
+  .disco.open{
+  grid-template-columns:minmax(0,1fr)}
+
+  .disco-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:var(--sp4) var(--sp3)}
+
+  .disco-panel{
+  border-left:0;
+  border-top:1px solid var(--line);
+  margin-top:var(--sp4)}
+
+  .disco-inner{
+  width:auto;
+  padding:var(--sp3) 0 0}
 
   .award{
   width:180px}
@@ -987,7 +1092,7 @@ height:44px}
   grid-template-areas:"logo" "cols" "bottom";
   gap:var(--sp4)}
 
-  /* 키워드 사진: 좁은 화면에서는 가로로 밀어서 보기 (라벨이 잘리지 않게) */
+  /* 키워드 사진: 좁은 화면에서는 가로로 밀어서 보기 */
   .kw-gallery{
   grid-template-columns:none;
   grid-auto-flow:column;
@@ -998,6 +1103,19 @@ height:44px}
 
   .kw-gallery li{
   scroll-snap-align:start}
+
+  /* 좁은 화면: 제목 아래에 소개 문장, 둘 다 왼쪽 정렬 */
+  .kw-head{
+  flex-direction:column;
+  gap:var(--sp2)}
+
+  .kw-line{
+  text-align:left}
+
+  /* 좁은 화면: 계단 배치를 풀고 순서대로 한 줄 */
+  .kw-gallery li:nth-child(n){
+  grid-column:auto;
+  grid-row:auto}
 
   /* 좁은 화면: 계단 배치 대신 2열로 쌓기 */
   /* 좁은 화면: 큰 카드 위에 한 줄, 작은 카드 4개는 2×2 */
@@ -1037,6 +1155,10 @@ visibility:hidden}
 
 .captcha:focus{
 outline:none}
+
+/* 캡차를 꺼둔 동안(index.html의 SHOW_CAPTCHA = false)에는 숨김 */
+html.no-captcha .captcha{
+display:none}
 
 html.captcha-open{
 overflow:hidden}
@@ -1168,7 +1290,7 @@ outline-offset:2px}
   animation:none!important;
   transition:none!important}
 
-  .reveal,.name,.kw-sentence .tok{
+  .reveal,.kw-sentence .tok{
   opacity:1!important;
   transform:none!important;
   filter:none!important}

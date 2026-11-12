@@ -8,8 +8,13 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<!-- 페이지를 열 때마다(새로고침 포함) 캡차를 띄우고, 그동안 뒤쪽 스크롤을 막음 -->
-<script>document.documentElement.classList.add('captcha-open')</script>
+<!-- 페이지를 열 때마다(새로고침 포함) 캡차를 띄우고, 그동안 뒤쪽 스크롤을 막음
+     ★ 수정 작업 중이라 잠시 꺼둠 → 다시 띄우려면 아래 SHOW_CAPTCHA 를 true 로 바꾸기 (이 한 줄만) -->
+<script>
+  window.SHOW_CAPTCHA = false;
+  if(window.SHOW_CAPTCHA) document.documentElement.classList.add('captcha-open');
+  else document.documentElement.classList.add('no-captcha');   // 꺼져 있을 때는 캡차가 깜빡이지도 않게 처음부터 숨김
+</script>
 
 <!-- ============ INTRO CAPTCHA ============ -->
 <div class="captcha" id="captcha" role="dialog" aria-modal="true" aria-labelledby="capTitle" tabindex="-1">
@@ -51,72 +56,111 @@
         <li><a href="#about">ABOUT</a></li>
         <li><a href="#members">MEMBERS</a></li>
         <li><a href="#albums">DISCOGRAPHY</a></li>
-        <li><a href="#awards">AWARDS</a></li>
         <li><a href="#media">MEDIA</a></li>
+        <li><a href="#awards">AWARDS</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <main>
-<!-- ============ HERO : 최신 MV (자동재생, 스크롤하면 사라짐) ============ -->
+<!-- ============ HERO : 하늘·언덕 배경 위에 둥둥 떠 있는 캐릭터 — 드래그하면 그 방향으로 돎 (스크롤하면 사라짐) ============ -->
 <section class="hero" id="top">
   <div class="hero-stage" id="heroStage">
-    <video class="hero-video" id="heroVideo" src="Resources/nctwish_odetolove_mv.mp4" autoplay muted loop playsinline aria-label="NCT WISH ‘Ode to Love’ 뮤직비디오 (소리 없음)"></video>
-    <button class="hero-toggle" id="heroToggle" type="button" aria-pressed="false">PAUSE</button>
+    <!-- 캐릭터: 앞·오른쪽·뒤·왼쪽 사진 4장을 각도(data-a)에 맞게 바꿔 끼워 3D로 도는 것처럼 보이게 -->
+    <div class="hero-char" id="heroChar" tabindex="0" role="img" aria-label="NCT WISH 별 캐릭터 (드래그하거나 좌우 방향키로 돌려볼 수 있음)">
+      <span class="hero-shadow" aria-hidden="true"></span>
+      <div class="hero-float">
+        <div class="hero-turn" id="heroTurn">
+          <img class="hero-view" src="Resources/hero_char_front.png" data-a="0" alt="" draggable="false">
+          <img class="hero-view" src="Resources/hero_char_right.png" data-a="90" alt="" draggable="false">
+          <img class="hero-view" src="Resources/hero_char_back.png" data-a="180" alt="" draggable="false">
+          <img class="hero-view" src="Resources/hero_char_left.png" data-a="270" alt="" draggable="false">
+        </div>
+      </div>
+    </div>
+    <p class="hero-hint" id="heroHint" aria-hidden="true">DRAG TO SPIN</p>
   </div>
-  <h1 class="hero-title"><img src="Resources/NCTWISH%20LOGO-white.png" alt="NCT WISH"></h1>
 </section>
 
 <!-- ============ ABOUT : NCT WISH sings about dreams, hopes, imagination, stories and fantasy ============ -->
 <section class="sec" id="about">
   <div class="shell">
-    <h2 class="sr-only">ABOUT</h2>
     <div class="kw-sentence">
-      <p class="kw-line">
-        <strong class="tok" style="--i:0">NCT WISH sings about dreams, hopes,<br>imagination, stories and fantasy.</strong>
-      </p>
-      <!-- 키워드 사진: 같은 크기로 한 줄, 사진 위 왼쪽에 키워드 라벨 -->
+      <!-- 위: 왼쪽 제목 / 오른쪽 소개 문장 -->
+      <div class="kw-head">
+        <h2 class="kw-title tok" style="--i:0">NCT WISH</h2>
+        <p class="kw-line">
+          <strong class="tok" style="--i:1">NCT WISH sings about dreams, hopes,<br>imagination, stories and fantasy.</strong>
+        </p>
+      </div>
+      <!-- 키워드 사진 5장: 4칸 그리드에 계단 배치 -->
+      <!-- --a = 사진이 나타나는 순서: 꿈 → 드림 → 판타지 → 상상 → 스토리 -->
       <ul class="kw-gallery">
-        <li class="tok" style="--i:7;--k:0"><span class="kw-label">DREAMS</span><div class="kw-frame"><img src="Resources/group_intro_꿈.jpg" alt="별무늬 바닥 위의 흰 운동화" style="object-position:12% 50%"></div></li>
-        <li class="tok" style="--i:8;--k:1"><span class="kw-label">HOPES</span><div class="kw-frame"><img src="Resources/group_intro_드림.jpg" alt="날개와 별 장식이 붙은 흰 문" style="object-position:62% 50%"></div></li>
-        <li class="tok" style="--i:9;--k:2"><span class="kw-label">IMAGINATION</span><div class="kw-frame"><img src="Resources/group_intro_상상.jpg" alt="흰 옷을 입은 사람의 손 사이에 놓인 흰 곰 인형"></div></li>
-        <li class="tok" style="--i:10;--k:3"><span class="kw-label">STORIES</span><div class="kw-frame"><img src="Resources/group_intro_스토리.jpg" alt="별 모양 반짝이 사이에 놓인 은색 디지털카메라"></div></li>
-        <li class="tok" style="--i:11;--k:4"><span class="kw-label">FANTASY</span><div class="kw-frame"><img src="Resources/group_intro_판타지.jpg" alt="어두운 방에서 작은 별을 들고 선 소년"></div></li>
+        <li class="tok" style="--i:7;--k:0;--a:0"><div class="kw-frame"><img src="Resources/group_intro_꿈.jpg" alt="별무늬 바닥 위의 흰 운동화" style="object-position:12% 50%"></div></li>
+        <li class="tok" style="--i:8;--k:1;--a:1"><div class="kw-frame"><img src="Resources/group_intro_드림.jpg" alt="날개와 별 장식이 붙은 흰 문" style="object-position:62% 50%"></div></li>
+        <li class="tok" style="--i:9;--k:2;--a:3"><div class="kw-frame"><img src="Resources/group_intro_상상.jpg" alt="흰 옷을 입은 사람의 손 사이에 놓인 흰 곰 인형"></div></li>
+        <li class="tok" style="--i:10;--k:3;--a:4"><div class="kw-frame"><img src="Resources/group_intro_스토리.jpg" alt="별 모양 반짝이 사이에 놓인 은색 디지털카메라"></div></li>
+        <li class="tok" style="--i:11;--k:4;--a:2"><div class="kw-frame"><img src="Resources/group_intro_판타지.jpg" alt="어두운 방에서 작은 별을 들고 선 소년"></div></li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- ============ MEMBERS : 스크롤하면 사진이 다음 멤버로 바뀌고 왼쪽 이름 색이 바뀜 ============ -->
+<!-- ============ MEMBERS : 왼쪽 큰 사진 + 이름·정보 / 오른쪽 세로 슬라이더 — 화면은 고정, 스크롤하면 슬라이더가 올라가며 가운데 멤버로 바뀜 ============ -->
 <section class="sec members" id="members">
   <h2 class="sr-only">MEMBERS</h2>
-  <div class="members-sticky" id="membersSticky">
-    <div class="members-names">
-      <ol class="names" id="names" aria-hidden="true"></ol>
+  <div class="mem-stage" id="memStage">
+    <div class="shell mem-split">
+      <!-- 왼쪽: 선택된 멤버 사진, 왼쪽 아래 코너에 이름·국적·생일 -->
+      <div class="mem-main" id="memMain">
+        <div class="mem-info" id="memInfo" aria-live="polite"><h3></h3><p></p><p></p></div>
+      </div>
+      <!-- 오른쪽: 멤버 사진 세로 슬라이더 (누르면 그 멤버로 이동) -->
+      <div class="mem-rail">
+        <ul class="mem-track" id="memTrack"></ul>
+      </div>
     </div>
-    <!-- 멤버별 사진·정보 (스크롤 위치에 맞는 1명만 보임) -->
-    <div class="member-panel" id="memberPanel"></div>
   </div>
 </section>
 
-<!-- ============ ALBUMS ============ -->
+<!-- ============ ALBUMS : 살짝 돌린 앨범 커버를 지그재그로 / 커버를 누르면 커버들이 왼쪽으로 밀리고 오른쪽에 앨범 설명이 열림 ============ -->
 <section class="sec" id="albums">
   <div class="shell">
-    <div class="album-grid">
-      <h2 class="sec-title album-head">DISCOGRAPHY</h2>
-      <div class="album-cover reveal"><img class="cover-img" id="aCover" src="" alt=""></div>
-      <div class="album-info reveal">
-        <span class="album-type" id="aType"></span>
-        <h3 id="aName"></h3>
-        <p class="intro" id="aIntro"></p>
-        <ol class="tracks" id="aTracks"></ol>
-        <a class="more-btn" id="aMore" href="#" target="_blank" rel="noopener">MORE</a>
+    <h2 class="sec-title">DISCOGRAPHY</h2>
+    <div class="disco" id="disco">
+      <ul class="disco-grid" id="discoGrid"></ul>
+      <!-- 설명 영역: 앨범 이름 · 종류/발매일 · 트랙리스트 · MORE -->
+      <div class="disco-panel" id="discoPanel" role="region" aria-label="앨범 설명" hidden>
+        <div class="disco-inner">
+          <button class="disco-close" id="discoClose" type="button" aria-label="앨범 설명 닫기">×</button>
+          <span class="album-type" id="aType"></span>
+          <h3 class="disco-name" id="aName" tabindex="-1"></h3>
+          <p class="intro" id="aIntro"></p>
+          <ol class="tracks" id="aTracks"></ol>
+          <a class="more-btn" id="aMore" href="#" target="_blank" rel="noopener">MORE</a>
+        </div>
       </div>
-      <button class="album-arrow album-up" id="albumUp" type="button" aria-label="이전 앨범">↑</button>
-      <div class="album-list">
-        <div class="album-view"><div class="album-track" id="albumTrack"></div></div>
-        <button class="album-arrow" id="albumDown" type="button" aria-label="다음 앨범">↓</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEDIA : 영상·화보 모음 — 도착하면 영상 카드가 좌우 끝까지 꽉 찼다가, 스크롤하면 줄어들며 왼쪽 자리로 ============ -->
+<section class="sec" id="media">
+  <div class="media-stage" id="mediaStage">
+    <div class="shell">
+      <h2 class="sec-title">MEDIA</h2>
+      <div class="media-board">
+        <!-- 영상 카드: 미리보기는 소리 없이 반복 재생, 누르면 원본 영상이 새 탭에서 열림 -->
+        <a class="m-card m-video has-video" href="Resources/2027%20NCT%20WISH%20SEASON%E2%80%99S%20GREETINGS%20BEHIND.mp4" target="_blank" rel="noopener" aria-label="2027 NCT WISH SEASON’S GREETINGS BEHIND 영상 보기 (새 탭)">
+          <video id="mediaVideo" src="Resources/2027%20NCT%20WISH%20SEASON%E2%80%99S%20GREETINGS%20BEHIND.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+          <span class="m-foot"><span class="m-title">2027 SEASON’S GREETINGS<br>BEHIND</span><span class="m-arrow" aria-hidden="true">→</span></span>
+        </a>
+        <!-- 화보집 4개: href를 실제 화보 주소로 바꿔주세요 -->
+        <a class="m-card m-photo has-photo" href="#"><img src="Resources/media_%EB%8D%B0%EC%9D%B4%EC%A6%88%EB%93%9C%20%EC%BD%94%EB%A6%AC%EC%95%84%208%EC%9B%94%ED%98%B8.jpg" alt="" style="object-position:50% 40%"><span class="m-title">데이즈드 코리아<br>8월호</span><span class="m-dot" aria-hidden="true"></span></a>
+        <a class="m-card m-photo has-photo" href="#"><img src="Resources/media_%EC%BD%94%EC%8A%A4%EB%AA%A8%20%ED%8F%B4%EB%A6%AC%ED%83%84%206%EC%9B%94%ED%98%B8.avif" alt="" style="object-position:50% 45%"><span class="m-title">코스모폴리탄<br>6월호</span><span class="m-dot" aria-hidden="true"></span></a>
+        <a class="m-card m-photo has-photo" href="#"><img src="Resources/media_%EC%97%98%EB%A5%B4%203%EC%9B%94%ED%98%B8.jpeg" alt="" style="object-position:50% 30%"><span class="m-title">엘르<br>3월호</span><span class="m-dot" aria-hidden="true"></span></a>
+        <a class="m-card m-photo has-photo" href="#"><img src="Resources/media_DICON%20VOLUME%20N%C2%B025.jpg" alt="" style="object-position:50% 30%"><span class="m-title">DICON<br>VOLUME N°25</span><span class="m-dot" aria-hidden="true"></span></a>
       </div>
     </div>
   </div>
@@ -129,25 +173,6 @@
   </div>
   <div class="awards-rail">
     <div class="awards-track" id="awardsTrack"></div>
-  </div>
-</section>
-
-<!-- ============ MEDIA : 영상·화보 모음 ============ -->
-<section class="sec" id="media">
-  <div class="shell">
-    <h2 class="sec-title">MEDIA</h2>
-    <div class="media-board">
-      <!-- 영상 카드: 미리보기는 소리 없이 반복 재생, 누르면 원본 영상이 새 탭에서 열림 -->
-      <a class="m-card m-video has-video" href="Resources/2027%20NCT%20WISH%20SEASON%E2%80%99S%20GREETINGS%20BEHIND.mp4" target="_blank" rel="noopener" aria-label="2027 NCT WISH SEASON’S GREETINGS BEHIND 영상 보기 (새 탭)">
-        <video id="mediaVideo" src="Resources/2027%20NCT%20WISH%20SEASON%E2%80%99S%20GREETINGS%20BEHIND.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
-        <span class="m-foot"><span class="m-title">2027 SEASON’S GREETINGS<br>BEHIND</span><span class="m-arrow" aria-hidden="true">→</span></span>
-      </a>
-      <!-- 화보집 4개: href를 실제 화보 주소로 바꿔주세요 -->
-      <a class="m-card m-photo has-photo" href="#"><img src="Resources/media_%EB%8D%B0%EC%9D%B4%EC%A6%88%EB%93%9C%20%EC%BD%94%EB%A6%AC%EC%95%84%208%EC%9B%94%ED%98%B8.jpg" alt="" style="object-position:50% 40%"><span class="m-title">데이즈드 코리아<br>8월호</span><span class="m-dot" aria-hidden="true"></span></a>
-      <a class="m-card m-photo has-photo" href="#"><img src="Resources/media_%EC%BD%94%EC%8A%A4%EB%AA%A8%20%ED%8F%B4%EB%A6%AC%ED%83%84%206%EC%9B%94%ED%98%B8.avif" alt="" style="object-position:50% 45%"><span class="m-title">코스모폴리탄<br>6월호</span><span class="m-dot" aria-hidden="true"></span></a>
-      <a class="m-card m-photo has-photo" href="#"><img src="Resources/media_%EC%97%98%EB%A5%B4%203%EC%9B%94%ED%98%B8.jpeg" alt="" style="object-position:50% 30%"><span class="m-title">엘르<br>3월호</span><span class="m-dot" aria-hidden="true"></span></a>
-      <a class="m-card m-photo has-photo" href="#"><img src="Resources/media_DICON%20VOLUME%20N%C2%B025.jpg" alt="" style="object-position:50% 30%"><span class="m-title">DICON<br>VOLUME N°25</span><span class="m-dot" aria-hidden="true"></span></a>
-    </div>
   </div>
 </section>
 
@@ -174,13 +199,13 @@
           <li><a href="#about">About</a></li>
           <li><a href="#members">Members</a></li>
           <li><a href="#albums">Discography</a></li>
-          <li><a href="#awards">Awards</a></li>
+          <li><a href="#media">Media</a></li>
         </ul>
       </div>
       <div class="f-col">
         <h2>More</h2>
         <ul>
-          <li><a href="#media">Media</a></li>
+          <li><a href="#awards">Awards</a></li>
           <li><a href="#notice">Notice</a></li>
         </ul>
       </div>
